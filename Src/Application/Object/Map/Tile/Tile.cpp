@@ -2,7 +2,7 @@
 
 void Tile::Init()
 {
-	m_model.Load("Asset/Models/Map/MapTile/tile.gltf");
+	//m_model.Load("Asset/Models/Map/MapTile/tile.gltf");
 	m_pos = {};
 	m_scale = { 10 };
 	m_rot = {};

@@ -261,6 +261,9 @@
     <ClInclude Include="Src\Application\Object\Map\Tile\Tile.h">
       <Filter>Src\Application\Object\Map\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Player\Player.h">
+      <Filter>Src\Application\Object\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Map\Tile\Tile.cpp">
       <Filter>Src\Application\Object\Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Player\Player.cpp">
+      <Filter>Src\Application\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
