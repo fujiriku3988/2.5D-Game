@@ -76,9 +76,6 @@
     <Filter Include="Src\Application\Object\Map">
       <UniqueIdentifier>{42a629a5-0f11-46bf-84cf-72f0a97154d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Player">
-      <UniqueIdentifier>{eff8faed-03a9-4b09-b845-d54f96e50026}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\Map\BackGround">
       <UniqueIdentifier>{112ad7e1-3bec-4d79-8650-97b3510ea8d0}</UniqueIdentifier>
     </Filter>
@@ -87,6 +84,15 @@
     </Filter>
     <Filter Include="Src\Application\Object\Map\Tile">
       <UniqueIdentifier>{d2edf304-b6a7-49ed-b19b-43b48cded0ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Character">
+      <UniqueIdentifier>{07447afb-b08a-4031-bb1c-7cd32bb0f4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Character\Player">
+      <UniqueIdentifier>{eff8faed-03a9-4b09-b845-d54f96e50026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Character\Enemy01">
+      <UniqueIdentifier>{988e17c9-34ca-4c6d-b4b6-2ca4dbb4b00e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -261,8 +267,14 @@
     <ClInclude Include="Src\Application\Object\Map\Tile\Tile.h">
       <Filter>Src\Application\Object\Map\Tile</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Player\Player.h">
-      <Filter>Src\Application\Object\Player</Filter>
+    <ClInclude Include="Src\Application\Object\Character\CharacterBase.h">
+      <Filter>Src\Application\Object\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Character\Player\Player.h">
+      <Filter>Src\Application\Object\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Character\Enemy01\Enemy01.h">
+      <Filter>Src\Application\Object\Character\Enemy01</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -413,8 +425,14 @@
     <ClCompile Include="Src\Application\Object\Map\Tile\Tile.cpp">
       <Filter>Src\Application\Object\Map\Tile</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Player\Player.cpp">
-      <Filter>Src\Application\Object\Player</Filter>
+    <ClCompile Include="Src\Application\Object\Character\CharacterBase.cpp">
+      <Filter>Src\Application\Object\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Character\Player\Player.cpp">
+      <Filter>Src\Application\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Character\Enemy01\Enemy01.cpp">
+      <Filter>Src\Application\Object\Character\Enemy01</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

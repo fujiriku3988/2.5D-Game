@@ -3,7 +3,8 @@
 #include"../../Object/Map/Tile/Tile.h"
 #include"../../Object/Map/BackGround/BackGround.h"
 #include"../../Object/Map/Stage/Stage.h"
-#include"../../Object/Player/Player.h"
+#include"../../Object/Character/Player/Player.h"
+#include"../../Object/Character/Enemy01/Enemy01.h"
 using namespace std;
 
 void GameScene::Event()
@@ -34,7 +35,7 @@ void GameScene::Event()
 	Math::Matrix rotMatY = Math::Matrix::CreateRotationY(m_camRot.y);
 	Math::Matrix rotMatX = Math::Matrix::CreateRotationX(m_camRot.x);
 	Math::Matrix camX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_camRad));
-	Math::Matrix Matrix = camX * transMat * rotMatY * rotMatX * playerMat;
+	Math::Matrix Matrix = camX * transMat * rotMatY  * playerMat;
 	m_camera->SetCameraMatrix(Matrix);
 
 }
@@ -43,7 +44,7 @@ void GameScene::Init()
 {
 	m_camera = make_unique<KdCamera>();
 	m_camera->SetProjectionMatrix(60);
-	m_camPos = { 0.0f,0.0f,-400.0f };
+	m_camPos = { 0.0f,2.0f,-7.0f };
 	m_camRot = {};
 	m_camRad = 0.0f;
 
@@ -59,6 +60,10 @@ void GameScene::Init()
 	shared_ptr<Stage>stage = make_shared<Stage>();
 	stage->Init();
 	AddObject(stage);
+	
+	shared_ptr<Enemy01>enemy01 = make_shared<Enemy01>();
+	enemy01->Init();
+	AddObject(enemy01);
 
 	shared_ptr<Player>player = make_shared<Player>();
 	player->Init();
