@@ -8,7 +8,7 @@ void Player::Init()
 	m_poly->SetMaterial("Asset/Textures/obj/player/player1.png");
 	m_pos = { 0,10,0 };
 	m_scale = { 1 };
-	m_speed = 0.1f;
+	m_speed = 0.05f;
 	m_poly->SetSplit(3, 4);
 	m_anima = 0;
 	m_poly->SetUVRect(1);
@@ -84,12 +84,17 @@ void Player::PreUpdate()
 			m_anima = 0;
 		}
 	}
+	
 }
 
 void Player::Update()
 {
+	m_dir = m_camPos - m_pos;
+	m_dir.Normalize();
+	//m_pos += m_move * m_dir;
+	m_move *=m_dir;
 	m_pos += m_move;
-	m_move = { 0,0,0 };
+	//m_move = { 0,0,0 };
 
 	//プレイヤー動き
 	if (GetAsyncKeyState('A') & 0x8000)
@@ -126,13 +131,19 @@ void Player::Update()
 
 	if (GetAsyncKeyState('S') & 0x8000)
 	{
-		m_move.z -= m_speed;
+		m_move.z += -m_speed;
 		m_anima += 0.08;
 		if (m_anima >= 4)
 		{
 			m_anima = 0;
 		}
 	}
+
+	/*if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { m_rot.x -= 0.05f; }
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000) { m_rot.x += 0.05f; }
+	if (GetAsyncKeyState(VK_UP) & 0x8000) { m_rot.x += 0.05f; }
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_rot.x -= 0.05f; }*/
+
 	m_pos.y -= m_gravity;
 	m_gravity += 0.005f;
 
@@ -224,8 +235,11 @@ void Player::PostUpdate()
 		m_pos += hitDir * maxOverLap;
 	}
 
-	Math::Matrix scaleMat = Math::Matrix::CreateScale(m_scale);
-	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
-	m_mWorld = scaleMat * transMat;
+	scaleMat = Math::Matrix::CreateScale(m_scale);
+	transMat = Math::Matrix::CreateTranslation(m_pos);
+	rotMatX = Math::Matrix::CreateRotationX(m_rot.x);
+	rotMatY = Math::Matrix::CreateRotationX(m_rot.y);
+	rotMatZ = Math::Matrix::CreateRotationX(m_rot.z);
+	m_mWorld = scaleMat * rotMatX * transMat;
 }
 

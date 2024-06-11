@@ -9,7 +9,9 @@ void CharacterBase::Init()
 	m_model = nullptr;
 	scaleMat = Math::Matrix::Identity;
 	transMat = Math::Matrix::Identity;
-	rotationMat = Math::Matrix::Identity;
+	rotMatX = Math::Matrix::Identity;
+	rotMatY = Math::Matrix::Identity;
+	rotMatZ = Math::Matrix::Identity;
 	m_gravity = 0;
 	m_anima = 0;
 	m_speed = 0;

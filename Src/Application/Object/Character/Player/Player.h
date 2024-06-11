@@ -12,6 +12,7 @@ public:
 	void Update()override;
 	void PostUpdate()override;
 
+	void SetCameraPos(Math::Vector3 _camPos) { m_camPos = _camPos; }
 
 private:
 	//アニメーション
@@ -23,4 +24,5 @@ private:
 	bool Walk_Lflg = false;
 	bool Walk_Uflg = false;
 	bool Walk_Dflg = false;
+	Math::Vector3 m_camPos;
 };

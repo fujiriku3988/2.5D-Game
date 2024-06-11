@@ -24,12 +24,15 @@ protected:
 	std::weak_ptr<CharacterBase>m_wpModel;
 	Math::Vector3 m_pos;
 	Math::Vector3 m_move;
+	Math::Vector3 m_dir;
 	Math::Vector3 m_rot;
 	Math::Vector3 m_scale;
 	float m_speed;
 	Math::Matrix scaleMat;
 	Math::Matrix transMat;
-	Math::Matrix rotationMat;
+	Math::Matrix rotMatX;
+	Math::Matrix rotMatY;
+	Math::Matrix rotMatZ;
 	//アニメーション
 	float m_anima;
 	float m_gravity;

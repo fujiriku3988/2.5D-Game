@@ -28,14 +28,18 @@ void GameScene::Event()
 	}
 
 	Math::Vector3 playerPos;
-	if (m_player.expired() == false) { playerPos = m_player.lock()->GetPos(); }
+	if (m_player.expired() == false) 
+	{ 
+		playerPos = m_player.lock()->GetPos();
+		m_player.lock()->SetCameraPos(m_camPos);
+	}
 	Math::Matrix playerMat = Math::Matrix::CreateTranslation(playerPos);
 
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_camPos);
 	Math::Matrix rotMatY = Math::Matrix::CreateRotationY(m_camRot.y);
 	Math::Matrix rotMatX = Math::Matrix::CreateRotationX(m_camRot.x);
 	Math::Matrix camX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_camRad));
-	Math::Matrix Matrix = camX * transMat * rotMatY  * playerMat;
+	Math::Matrix Matrix = camX * transMat * rotMatY * rotMatX * playerMat;
 	m_camera->SetCameraMatrix(Matrix);
 
 }

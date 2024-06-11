@@ -10,7 +10,7 @@ void Enemy01::Init()
 	m_scale = { 1 };
 	m_speed = 0.1f;
 	m_poly->SetSplit(3, 4);
-	m_poly->SetUVRect(1);
+	m_poly->SetUVRect(0);
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 }
 
