@@ -12,7 +12,9 @@ public:
 	void Update()override;
 	void PostUpdate()override;
 
-	void SetCameraPos(Math::Vector3 _camPos) { m_camPos = _camPos; }
+	void SetCameraPos(Math::Vector3 _camPos) { m_camPos = _camPos; }//カメラのpos座標（使うかも）
+	void SetCameraVec(Math::Vector3 _cameravec) { m_camVec = _cameravec; }//カメラの前ベクトル
+	void ResetRot() { m_rot = {}; }
 
 private:
 	//アニメーション
@@ -25,4 +27,7 @@ private:
 	bool Walk_Uflg = false;
 	bool Walk_Dflg = false;
 	Math::Vector3 m_camPos;
+	Math::Vector3 m_camVec;
+	Math::Vector3 m_playerFowardVec;//前ベクター
+	Math::Vector3 m_playerSideVec;//横ベクター
 };

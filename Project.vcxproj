@@ -162,6 +162,7 @@
     <ClInclude Include="Src\Application\Object\Map\BackGround\BackGround.h" />
     <ClInclude Include="Src\Application\Object\Map\Stage\Stage.h" />
     <ClInclude Include="Src\Application\Object\Map\Tile\Tile.h" />
+    <ClInclude Include="Src\Application\Object\Map\tree\Tree.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Scene\SceneManager.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Src\Application\Object\Map\BackGround\BackGround.cpp" />
     <ClCompile Include="Src\Application\Object\Map\Stage\Stage.cpp" />
     <ClCompile Include="Src\Application\Object\Map\Tile\Tile.cpp" />
+    <ClCompile Include="Src\Application\Object\Map\tree\Tree.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />

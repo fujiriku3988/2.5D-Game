@@ -1,10 +1,10 @@
 ﻿#pragma once
-class Stage :public KdGameObject
+class Tree :public KdGameObject
 {
 public:
 
-	Stage() {};
-	~Stage()override {};
+	Tree() {};
+	~Tree()override {};
 
 	void Init()override;
 	void Update()override;

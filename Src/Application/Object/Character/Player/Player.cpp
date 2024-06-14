@@ -7,10 +7,11 @@ void Player::Init()
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/player/player1.png");
 	m_pos = { 0,10,0 };
-	m_scale = { 1 };
+	m_scale = { 1.0 };
 	m_speed = 0.05f;
 	m_poly->SetSplit(3, 4);
-	m_anima = 0;
+	m_anime = 0;
+	m_animeSpeed = 0.08f;
 	m_poly->SetUVRect(1);
 	Walk_Rflg = false;
 	Walk_Lflg = false;
@@ -21,9 +22,15 @@ void Player::Init()
 
 void Player::PreUpdate()
 {
+	// 前方向ベクトル
+	m_playerFowardVec = GetMatrix().Backward();
+	m_playerSideVec = GetMatrix().Right();
+	//m_playerFowardVec = m_camVec;
+	//camera.GetMatrix().Backward();
+
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
-		m_poly->SetUVRect(Walk_L[(int)m_anima]);
+		m_poly->SetUVRect(Walk_L[(int)m_anime]);
 		Walk_Rflg = false;
 		Walk_Lflg = true;
 		Walk_Uflg = false;
@@ -33,7 +40,7 @@ void Player::PreUpdate()
 
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
-		m_poly->SetUVRect(Walk_R[(int)m_anima]);
+		m_poly->SetUVRect(Walk_R[(int)m_anime]);
 		Walk_Rflg = true;
 		Walk_Lflg = false;
 		Walk_Uflg = false;
@@ -42,7 +49,7 @@ void Player::PreUpdate()
 
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
-		m_poly->SetUVRect(Walk_U[(int)m_anima]);
+		m_poly->SetUVRect(Walk_U[(int)m_anime]);
 		Walk_Rflg = false;
 		Walk_Lflg = false;
 		Walk_Uflg = true;
@@ -51,7 +58,7 @@ void Player::PreUpdate()
 
 	if (GetAsyncKeyState('S') & 0x8000)
 	{
-		m_poly->SetUVRect(Walk_D[(int)m_anima]);
+		m_poly->SetUVRect(Walk_D[(int)m_anime]);
 		Walk_Rflg = false;
 		Walk_Lflg = false;
 		Walk_Uflg = false;
@@ -63,12 +70,12 @@ void Player::PreUpdate()
 		if (Walk_Lflg)
 		{
 			m_poly->SetUVRect(4);
-			m_anima = 0;
+			m_anime = 0;
 		}
 		if (Walk_Rflg)
 		{
 			m_poly->SetUVRect(7);
-			m_anima = 0;
+			m_anime = 0;
 		}
 	}
 	if (m_move.z == 0)
@@ -76,12 +83,12 @@ void Player::PreUpdate()
 		if (Walk_Uflg)
 		{
 			m_poly->SetUVRect(10);
-			m_anima = 0;
+			m_anime = 0;
 		}
 		if (Walk_Dflg)
 		{
 			m_poly->SetUVRect(1);
-			m_anima = 0;
+			m_anime = 0;
 		}
 	}
 	
@@ -89,60 +96,64 @@ void Player::PreUpdate()
 
 void Player::Update()
 {
-	m_dir = m_camPos - m_pos;
-	m_dir.Normalize();
+	//m_dir = m_camPos - m_pos;
+	//m_dir.Normalize();
 	//m_pos += m_move * m_dir;
-	m_move *=m_dir;
+	//m_move *=m_playerVec;
 	m_pos += m_move;
-	//m_move = { 0,0,0 };
+	m_move = { 0,0,0 };
 
 	//プレイヤー動き
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
 		//m_move.x -= 0.1f;
-		m_move.x -= m_speed;
-		m_anima += 0.08;
-		if (m_anima >= 4)
+		//m_move.x -= m_speed;
+		m_move += m_playerSideVec * -m_speed;
+		m_anime += m_animeSpeed;
+		if (m_anime >= 4)
 		{
-			m_anima = 0;
+			m_anime = 0;
 		}
 	}
 
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
 		//m_move.x += 0.1f;
-		m_move.x += m_speed;
-		m_anima += 0.08;
-		if (m_anima >= 4)
+		//m_move.x += m_speed;
+		m_move += m_playerSideVec * m_speed;
+		m_anime += m_animeSpeed;
+		if (m_anime >= 4)
 		{
-			m_anima = 0;
+			m_anime = 0;
 		}
 	}
 
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
-		m_move.z += m_speed;
-		m_anima += 0.08;
-		if (m_anima >= 4)
+		//m_move.z += m_speed;
+		m_move += m_playerFowardVec * m_speed;
+		m_anime += m_animeSpeed;
+		if (m_anime >= 4)
 		{
-			m_anima = 0;
+			m_anime = 0;
 		}
 	}
 
 	if (GetAsyncKeyState('S') & 0x8000)
 	{
-		m_move.z += -m_speed;
-		m_anima += 0.08;
-		if (m_anima >= 4)
+		//m_move.z += -m_speed;
+		m_move += m_playerFowardVec * -m_speed;
+		m_anime += m_animeSpeed;
+		if (m_anime >= 4)
 		{
-			m_anima = 0;
+			m_anime = 0;
 		}
 	}
 
-	/*if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { m_rot.x -= 0.05f; }
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) { m_rot.x += 0.05f; }
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { m_rot.y -= 0.05f; }
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000) { m_rot.y += 0.05f; }
 	if (GetAsyncKeyState(VK_UP) & 0x8000) { m_rot.x += 0.05f; }
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_rot.x -= 0.05f; }*/
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_rot.x -= 0.05f; }
 
 	m_pos.y -= m_gravity;
 	m_gravity += 0.005f;
@@ -238,8 +249,8 @@ void Player::PostUpdate()
 	scaleMat = Math::Matrix::CreateScale(m_scale);
 	transMat = Math::Matrix::CreateTranslation(m_pos);
 	rotMatX = Math::Matrix::CreateRotationX(m_rot.x);
-	rotMatY = Math::Matrix::CreateRotationX(m_rot.y);
-	rotMatZ = Math::Matrix::CreateRotationX(m_rot.z);
-	m_mWorld = scaleMat * rotMatX * transMat;
+	rotMatY = Math::Matrix::CreateRotationY(m_rot.y);
+	rotMatZ = Math::Matrix::CreateRotationZ(m_rot.z);
+	m_mWorld = scaleMat * rotMatY * transMat;
 }
 

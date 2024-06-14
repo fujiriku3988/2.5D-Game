@@ -94,6 +94,9 @@
     <Filter Include="Src\Application\Object\Character\Enemy01">
       <UniqueIdentifier>{988e17c9-34ca-4c6d-b4b6-2ca4dbb4b00e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Map\tree">
+      <UniqueIdentifier>{385528be-df6b-421b-a018-32b8ce5a7b74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -276,6 +279,9 @@
     <ClInclude Include="Src\Application\Object\Character\Enemy01\Enemy01.h">
       <Filter>Src\Application\Object\Character\Enemy01</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\tree\Tree.h">
+      <Filter>Src\Application\Object\Map\tree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -433,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Character\Enemy01\Enemy01.cpp">
       <Filter>Src\Application\Object\Character\Enemy01</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\tree\Tree.cpp">
+      <Filter>Src\Application\Object\Map\tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

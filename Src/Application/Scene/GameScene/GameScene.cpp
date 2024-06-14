@@ -3,6 +3,7 @@
 #include"../../Object/Map/Tile/Tile.h"
 #include"../../Object/Map/BackGround/BackGround.h"
 #include"../../Object/Map/Stage/Stage.h"
+#include"../../Object/Map/Tree/Tree.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/Character/Enemy01/Enemy01.h"
 using namespace std;
@@ -16,39 +17,48 @@ void GameScene::Event()
 			SceneManager::SceneType::Title
 		);
 	}
+	//カメラ操作
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { m_camRot.y -= 0.05f; }
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000) { m_camRot.y += 0.05f; }
-	if (GetAsyncKeyState(VK_UP) & 0x8000) { m_camRot.x += 0.05f; }
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_camRot.x -= 0.05f; }
-	/*if (GetAsyncKeyState(VK_UP) & 0x8000) { m_camRad -= 1.0f; }
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_camRad += 1.0f; }*/
-	if (GetAsyncKeyState('R') & 0x8000)
-	{
-		m_camRot = {};
-	}
 
+	//カメラの前ベクトル
+	Math::Vector3 cameraVec;
+	cameraVec = m_camera->GetCameraMatrix().Backward();
+
+	//プレイヤーに情報を渡す
 	Math::Vector3 playerPos;
 	if (m_player.expired() == false) 
 	{ 
 		playerPos = m_player.lock()->GetPos();
-		m_player.lock()->SetCameraPos(m_camPos);
+		//カメラの角度をリセット
+		if (GetAsyncKeyState('R') & 0x8000)
+		{
+			m_camRot = {};
+			m_player.lock()->ResetRot();
+		}
 	}
-	Math::Matrix playerMat = Math::Matrix::CreateTranslation(playerPos);
 
+	//テスト
+	/*Math::Vector3 a = m_camera->GetCameraMatrix().Right();
+	Math::Vector3 b = m_camera->GetCameraMatrix().Up();
+	m_camRot *= b;*/
+
+	//プレイヤーの移動行列
+	Math::Matrix playerMat = Math::Matrix::CreateTranslation(playerPos);
+	//行列の更新
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_camPos);
 	Math::Matrix rotMatY = Math::Matrix::CreateRotationY(m_camRot.y);
 	Math::Matrix rotMatX = Math::Matrix::CreateRotationX(m_camRot.x);
 	Math::Matrix camX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_camRad));
 	Math::Matrix Matrix = camX * transMat * rotMatY * rotMatX * playerMat;
 	m_camera->SetCameraMatrix(Matrix);
-
 }
 
 void GameScene::Init()
 {
 	m_camera = make_unique<KdCamera>();
 	m_camera->SetProjectionMatrix(60);
-	m_camPos = { 0.0f,2.0f,-7.0f };
+	m_camPos = { 0.0f,2.5f,-10.0f };
 	m_camRot = {};
 	m_camRad = 0.0f;
 
@@ -64,6 +74,10 @@ void GameScene::Init()
 	shared_ptr<Stage>stage = make_shared<Stage>();
 	stage->Init();
 	AddObject(stage);
+
+	shared_ptr<Tree>tree = make_shared<Tree>();
+	tree->Init();
+	AddObject(tree);
 	
 	shared_ptr<Enemy01>enemy01 = make_shared<Enemy01>();
 	enemy01->Init();
@@ -71,6 +85,7 @@ void GameScene::Init()
 
 	shared_ptr<Player>player = make_shared<Player>();
 	player->Init();
+	//player->SetCamera(m_camera);
 	AddObject(player);
 	m_player = player;
 }

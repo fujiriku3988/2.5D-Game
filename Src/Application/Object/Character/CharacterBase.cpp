@@ -13,7 +13,7 @@ void CharacterBase::Init()
 	rotMatY = Math::Matrix::Identity;
 	rotMatZ = Math::Matrix::Identity;
 	m_gravity = 0;
-	m_anima = 0;
+	m_anime = 0;
 	m_speed = 0;
 	//デバッグ用
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();

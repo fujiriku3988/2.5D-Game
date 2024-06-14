@@ -3,7 +3,7 @@ class CharacterBase :public KdGameObject
 {
 public:
 	CharacterBase() {};
-	~CharacterBase() {};
+	~CharacterBase()override {};
 
 	void Init()override;
 	void PreUpdate()override;
@@ -34,6 +34,7 @@ protected:
 	Math::Matrix rotMatY;
 	Math::Matrix rotMatZ;
 	//アニメーション
-	float m_anima;
+	float m_anime;
+	float m_animeSpeed;
 	float m_gravity;
 };
