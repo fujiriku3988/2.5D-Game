@@ -1,9 +1,9 @@
 ﻿#pragma once
-class CharacterBase :public KdGameObject
+class BaseEffect :public KdGameObject
 {
 public:
-	CharacterBase() {};
-	~CharacterBase()override {};
+	BaseEffect() {};
+	~BaseEffect()override {};
 
 	void Init()override;
 	void PreUpdate()override;
@@ -12,16 +12,13 @@ public:
 	void DrawLit()override;
 	void GenerateDepthMapFromLight()override;
 
-	void SetCharacterPoly(std::shared_ptr<CharacterBase>_poly) { m_wpPoly = _poly; }
-	void SetCharacterModel(std::shared_ptr<CharacterBase>_model) { m_wpModel = _model; }
-	
+	void SetEffectPoly(std::shared_ptr<BaseEffect>_poly) { m_wpPoly = _poly; }
+	//void SetEffectPos(Math::Vector3 _pos) { m_pos = _pos; }
 protected:
-	//KdModelData m_model;
-	//KdSquarePolygon m_poly;
 	std::shared_ptr<KdSquarePolygon>m_poly = nullptr;
 	std::shared_ptr<KdModelData>m_model = nullptr;
-	std::weak_ptr<CharacterBase>m_wpPoly;
-	std::weak_ptr<CharacterBase>m_wpModel;
+	std::weak_ptr<BaseEffect>m_wpPoly;
+	std::weak_ptr<BaseEffect>m_wpModel;
 	Math::Vector3 m_pos;
 	Math::Vector3 m_move;
 	Math::Vector3 m_dir;
@@ -36,5 +33,4 @@ protected:
 	//アニメーション
 	float m_anime;
 	float m_animeSpeed;
-	float m_gravity;
 };

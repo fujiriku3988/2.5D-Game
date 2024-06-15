@@ -97,6 +97,12 @@
     <Filter Include="Src\Application\Object\Map\tree">
       <UniqueIdentifier>{385528be-df6b-421b-a018-32b8ce5a7b74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Effect">
+      <UniqueIdentifier>{6e595bde-6164-42a5-a67a-18e2e335308d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Effect\Fire">
+      <UniqueIdentifier>{aaa09921-4dfc-4633-b72b-dee1337ca529}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -282,6 +288,12 @@
     <ClInclude Include="Src\Application\Object\Map\tree\Tree.h">
       <Filter>Src\Application\Object\Map\tree</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Effect\BaseEffect.h">
+      <Filter>Src\Application\Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Effect\Fire\Fire.h">
+      <Filter>Src\Application\Object\Effect\Fire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -442,6 +454,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Map\tree\Tree.cpp">
       <Filter>Src\Application\Object\Map\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Effect\BaseEffect.cpp">
+      <Filter>Src\Application\Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Effect\Fire\Fire.cpp">
+      <Filter>Src\Application\Object\Effect\Fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

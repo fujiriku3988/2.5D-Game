@@ -159,6 +159,8 @@
     <ClInclude Include="Src\Application\Object\Character\CharacterBase.h" />
     <ClInclude Include="Src\Application\Object\Character\Enemy01\Enemy01.h" />
     <ClInclude Include="Src\Application\Object\Character\Player\Player.h" />
+    <ClInclude Include="Src\Application\Object\Effect\BaseEffect.h" />
+    <ClInclude Include="Src\Application\Object\Effect\Fire\Fire.h" />
     <ClInclude Include="Src\Application\Object\Map\BackGround\BackGround.h" />
     <ClInclude Include="Src\Application\Object\Map\Stage\Stage.h" />
     <ClInclude Include="Src\Application\Object\Map\Tile\Tile.h" />
@@ -216,6 +218,8 @@
     <ClCompile Include="Src\Application\Object\Character\CharacterBase.cpp" />
     <ClCompile Include="Src\Application\Object\Character\Enemy01\Enemy01.cpp" />
     <ClCompile Include="Src\Application\Object\Character\Player\Player.cpp" />
+    <ClCompile Include="Src\Application\Object\Effect\BaseEffect.cpp" />
+    <ClCompile Include="Src\Application\Object\Effect\Fire\Fire.cpp" />
     <ClCompile Include="Src\Application\Object\Map\BackGround\BackGround.cpp" />
     <ClCompile Include="Src\Application\Object\Map\Stage\Stage.cpp" />
     <ClCompile Include="Src\Application\Object\Map\Tile\Tile.cpp" />

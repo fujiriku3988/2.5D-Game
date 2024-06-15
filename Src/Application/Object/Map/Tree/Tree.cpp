@@ -3,7 +3,7 @@
 void Tree::Init()
 {
 	m_model = std::make_shared<KdModelData>();
-	m_model->Load("Asset/Models/Map/tree/tree1.gltf");
+	m_model->Load("Asset/Models/Map/Tree/tree3.gltf");
 	m_pos = {};
 	m_scale = { 1.0f };
 	m_rot = {};

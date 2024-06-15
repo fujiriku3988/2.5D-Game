@@ -6,7 +6,7 @@ void Player::Init()
 	CharacterBase::Init();
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/player/player1.png");
-	m_pos = { 0,10,0 };
+	m_pos = { 0,6,0 };
 	m_scale = { 1.0 };
 	m_speed = 0.05f;
 	m_poly->SetSplit(3, 4);

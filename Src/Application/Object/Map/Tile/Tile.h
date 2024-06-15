@@ -4,7 +4,7 @@ class Tile :public KdGameObject
 public:
 
 	Tile() {};
-	~Tile() {};
+	~Tile() override{};
 
 	void Init()override;
 	void DrawLit()override;

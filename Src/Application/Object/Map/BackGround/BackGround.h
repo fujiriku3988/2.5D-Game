@@ -4,7 +4,7 @@ class BackGround :public KdGameObject
 public:
 
 	BackGround() {};
-	~BackGround() {};
+	~BackGround() override{};
 
 	void Init()override;
 	void DrawLit()override;

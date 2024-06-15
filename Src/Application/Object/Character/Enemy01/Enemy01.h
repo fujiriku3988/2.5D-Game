@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include"../../Character/CharacterBase.h"
+class Fire;
 class Enemy01 :public CharacterBase
 {
 public:
@@ -13,4 +14,5 @@ public:
 	void PostUpdate()override;
 
 private:
+	std::shared_ptr<Fire>fire = nullptr;
 };

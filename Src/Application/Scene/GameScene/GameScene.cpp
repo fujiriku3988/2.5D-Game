@@ -6,6 +6,7 @@
 #include"../../Object/Map/Tree/Tree.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/Character/Enemy01/Enemy01.h"
+#include"../../Object/Effect/Fire/Fire.h"
 using namespace std;
 
 void GameScene::Event()
@@ -62,6 +63,9 @@ void GameScene::Init()
 	m_camRot = {};
 	m_camRad = 0.0f;
 
+	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, true);
+	KdShaderManager::Instance().WorkAmbientController().SetDistanceFog({ 1,1,1 }, 0.001);
+	//KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1,1,1 }, 0, -1, 10);
 
 	shared_ptr<Tile>tile = make_shared<Tile>();
 	tile->Init();
@@ -82,6 +86,10 @@ void GameScene::Init()
 	shared_ptr<Enemy01>enemy01 = make_shared<Enemy01>();
 	enemy01->Init();
 	AddObject(enemy01);
+
+	shared_ptr<Fire>fire = make_shared<Fire>();
+	fire->Init();
+	AddObject(fire);
 
 	shared_ptr<Player>player = make_shared<Player>();
 	player->Init();
