@@ -7,26 +7,39 @@ void Enemy01::Init()
 	CharacterBase::Init();
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/enemy01/enemy01.png");
-	m_pos = { 1.8f,10,0 };
+	m_pos = { 1.5f,10,0.3f };
 	m_scale = { 1 };
 	m_speed = 0.1f;
 	m_poly->SetSplit(3, 4);
 	m_poly->SetUVRect(0);
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
-
-	/*fire = std::make_shared<Fire>();
-	fire->Init();
-	SceneManager::Instance().AddObject(fire);*/
+	m_fire = false;
+	m_coolTime = 30;
 }
 
 void Enemy01::PreUpdate()
 {
+	m_coolTime--;
+	if (m_coolTime <= 0)
+	{
+		m_coolTime = 0;
+		m_fire = true;
+	}
+	if (m_fire)
+	{
+		fire = std::make_shared<Fire>();
+		fire->Init();
+		fire->SetFirePos(m_pos+Math::Vector3{0.5f,0.0f,0.0f});
+		SceneManager::Instance().AddObject(fire);
+		m_coolTime = 30;
+		m_fire = false;
+	}
 }
 
 void Enemy01::Update()
 {
-	m_pos.y -= m_gravity;
 	m_gravity += 0.005f;
+	m_pos.y -= m_gravity;
 }
 
 void Enemy01::PostUpdate()

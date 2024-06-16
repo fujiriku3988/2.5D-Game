@@ -6,7 +6,7 @@
 #include"../../Object/Map/Tree/Tree.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/Character/Enemy01/Enemy01.h"
-#include"../../Object/Effect/Fire/Fire.h"
+#include"../../Object/Character/Player/Hp/Hp.h"
 using namespace std;
 
 void GameScene::Event()
@@ -87,9 +87,9 @@ void GameScene::Init()
 	enemy01->Init();
 	AddObject(enemy01);
 
-	shared_ptr<Fire>fire = make_shared<Fire>();
-	fire->Init();
-	AddObject(fire);
+	shared_ptr<Hp>hp = make_shared<Hp>();
+	hp->Init();
+	AddObject(hp);
 
 	shared_ptr<Player>player = make_shared<Player>();
 	player->Init();

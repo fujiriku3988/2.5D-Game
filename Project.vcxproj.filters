@@ -103,6 +103,9 @@
     <Filter Include="Src\Application\Object\Effect\Fire">
       <UniqueIdentifier>{aaa09921-4dfc-4633-b72b-dee1337ca529}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Character\Player\Hp">
+      <UniqueIdentifier>{d3fc4115-3014-442e-a8b4-aaa11f25cf9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -294,6 +297,9 @@
     <ClInclude Include="Src\Application\Object\Effect\Fire\Fire.h">
       <Filter>Src\Application\Object\Effect\Fire</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Character\Player\Hp\Hp.h">
+      <Filter>Src\Application\Object\Character\Player\Hp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -460,6 +466,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Effect\Fire\Fire.cpp">
       <Filter>Src\Application\Object\Effect\Fire</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Character\Player\Hp\Hp.cpp">
+      <Filter>Src\Application\Object\Character\Player\Hp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,18 +6,22 @@ void Player::Init()
 	CharacterBase::Init();
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/player/player1.png");
-	m_pos = { 0,6,0 };
+	m_pos = { 0,6,3 };
 	m_scale = { 1.0 };
 	m_speed = 0.05f;
 	m_poly->SetSplit(3, 4);
 	m_anime = 0;
+	m_hp = 2;
 	m_animeSpeed = 0.08f;
 	m_poly->SetUVRect(1);
 	Walk_Rflg = false;
 	Walk_Lflg = false;
 	Walk_Uflg = false;
 	Walk_Dflg = false;
+	m_hitFlg = false;
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
+	m_color = { 1,1,1,1 };
+	m_time = 6;
 }
 
 void Player::PreUpdate()
@@ -25,9 +29,8 @@ void Player::PreUpdate()
 	// 前方向ベクトル
 	m_playerFowardVec = GetMatrix().Backward();
 	m_playerSideVec = GetMatrix().Right();
-	//m_playerFowardVec = m_camVec;
-	//camera.GetMatrix().Backward();
 
+	//キャラアニメーション
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
 		m_poly->SetUVRect(Walk_L[(int)m_anime]);
@@ -91,15 +94,31 @@ void Player::PreUpdate()
 			m_anime = 0;
 		}
 	}
-	
+
+	//ダメージ受けた時のカラー変更
+	if (m_hitFlg)
+	{
+		m_time--;
+		if (m_time >= 0)
+		{
+			m_color = { 10,10,10,1 };
+		}
+		else
+		{
+			m_hitFlg = false;
+			m_time = 6;
+		}
+
+	}
+	else
+	{
+		m_color = { 1,1,1,1 };
+	}
+
 }
 
 void Player::Update()
 {
-	//m_dir = m_camPos - m_pos;
-	//m_dir.Normalize();
-	//m_pos += m_move * m_dir;
-	//m_move *=m_playerVec;
 	m_pos += m_move;
 	m_move = { 0,0,0 };
 
@@ -212,14 +231,22 @@ void Player::PostUpdate()
 	//球の半径を設定
 	sphere.m_sphere.Radius = 0.3f;
 	//当たり判定をしたいタイプを設定
-	sphere.m_type = KdCollider::TypeGround;
+	sphere.m_type = KdCollider::TypeGround | KdCollider::TypeDamage;
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
 	//球が当たったオブジェクトの情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retSphereList;
 	//球と当たり判定！！！！！！
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
-		obj->Intersects(sphere, &retSphereList);
+		if (obj->Intersects(sphere, &retSphereList))
+		{
+			if (obj->GetObjType() == KdGameObject::FireAttack)
+			{
+				//m_isExpired = true;
+				obj->OnHit();
+				OnHit();
+			}
+		}
 	}
 	//球リストから一番近いオブジェクトを検出
 	maxOverLap = 0;		//はみ出た例の長さ
@@ -237,13 +264,13 @@ void Player::PostUpdate()
 	}
 	if (ishit)
 	{
-		//z方向無効
-		//hitDir.z = 0;
-
-		//方向ベクトルは長さ１にする必要がある 
-		hitDir.Normalize();
-		//押し戻し
-		m_pos += hitDir * maxOverLap;
+		if (sphere.m_type == KdCollider::TypeGround)
+		{
+			//方向ベクトルは長さ１にする必要がある 
+			hitDir.Normalize();
+			//押し戻し
+			m_pos += hitDir * maxOverLap;
+		}
 	}
 
 	scaleMat = Math::Matrix::CreateScale(m_scale);
@@ -254,3 +281,8 @@ void Player::PostUpdate()
 	m_mWorld = scaleMat * rotMatY * transMat;
 }
 
+void Player::OnHit()
+{
+	m_hitFlg = true;
+	m_hp--;
+}

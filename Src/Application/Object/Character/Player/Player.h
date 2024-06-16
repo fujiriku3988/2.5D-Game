@@ -4,8 +4,8 @@ class Player :public CharacterBase
 {
 public:
 
-	Player() {};
-	~Player() override{};
+	Player() {}
+	~Player() override{}
 
 	void Init()override;
 	void PreUpdate()override;
@@ -13,10 +13,12 @@ public:
 	void PostUpdate()override;
 
 	void SetCameraPos(Math::Vector3 _camPos) { m_camPos = _camPos; }//カメラのpos座標（使うかも）
-	void SetCameraVec(Math::Vector3 _cameravec) { m_camVec = _cameravec; }//カメラの前ベクトル
 	void ResetRot() { m_rot = {}; }
+	void OnHit();
 
 private:
+	//プレイヤーHP
+	int m_hp;
 	//アニメーション
 	int Walk_R[4] = { 6,7,8,7 };//右
 	int Walk_L[4] = {3,4,5,4};//左
@@ -26,8 +28,12 @@ private:
 	bool Walk_Lflg = false;
 	bool Walk_Uflg = false;
 	bool Walk_Dflg = false;
+	//当たり判定で使う変数
+	bool m_hitFlg;
+	int m_time;
+	//カメラの座標
 	Math::Vector3 m_camPos;
-	Math::Vector3 m_camVec;
+	//プレイヤーベクトル
 	Math::Vector3 m_playerFowardVec;//前ベクター
 	Math::Vector3 m_playerSideVec;//横ベクター
 };

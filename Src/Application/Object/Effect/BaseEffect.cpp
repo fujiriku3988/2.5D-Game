@@ -6,6 +6,7 @@ void BaseEffect::Init()
 	m_scale = { 1 };
 	m_move = {};
 	m_poly = nullptr;
+	m_color = { 1,1,1,1 };
 	scaleMat = Math::Matrix::Identity;
 	transMat = Math::Matrix::Identity;
 	rotMatX = Math::Matrix::Identity;
@@ -31,10 +32,10 @@ void BaseEffect::PostUpdate()
 
 void BaseEffect::DrawLit()
 {
-	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld);
+	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld, m_color);
 }
 
 void BaseEffect::GenerateDepthMapFromLight()
 {
-	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld);
+	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld, m_color);
 }

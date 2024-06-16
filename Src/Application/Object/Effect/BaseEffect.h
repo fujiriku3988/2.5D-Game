@@ -24,6 +24,7 @@ protected:
 	Math::Vector3 m_dir;
 	Math::Vector3 m_rot;
 	Math::Vector3 m_scale;
+	Math::Color m_color;
 	float m_speed;
 	Math::Matrix scaleMat;
 	Math::Matrix transMat;

@@ -10,6 +10,7 @@ void Stage::Init()
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("StageCollision", m_model, KdCollider::TypeGround);
+	m_objType = None;
 }
 
 void Stage::Update()

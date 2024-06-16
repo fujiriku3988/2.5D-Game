@@ -10,6 +10,7 @@ public:
 	void Update()override;
 	void PostUpdate()override;
 	void DrawLit()override;
+	void DrawSprite()override;
 	void GenerateDepthMapFromLight()override;
 
 	void SetCharacterPoly(std::shared_ptr<CharacterBase>_poly) { m_wpPoly = _poly; }
@@ -22,11 +23,13 @@ protected:
 	std::shared_ptr<KdModelData>m_model = nullptr;
 	std::weak_ptr<CharacterBase>m_wpPoly;
 	std::weak_ptr<CharacterBase>m_wpModel;
+	KdTexture m_tex;
 	Math::Vector3 m_pos;
 	Math::Vector3 m_move;
 	Math::Vector3 m_dir;
 	Math::Vector3 m_rot;
 	Math::Vector3 m_scale;
+	Math::Color m_color;
 	float m_speed;
 	Math::Matrix scaleMat;
 	Math::Matrix transMat;

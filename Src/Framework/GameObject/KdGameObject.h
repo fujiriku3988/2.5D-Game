@@ -4,6 +4,15 @@
 class KdGameObject : public std::enable_shared_from_this<KdGameObject>
 {
 public:
+	//オブジェクトのタイプ
+	enum
+	{
+		None,
+		Player,
+		Enemy,
+		FireAttack,
+		MAX
+	};
 
 	// どのような描画を行うのかを設定するTypeID：Bitフラグで複数指定可能
 	enum
@@ -35,6 +44,9 @@ public:
 
 	virtual void DrawDebug();
 
+	//当たり判定時に変える
+	virtual void OnHit() {}
+
 	virtual void SetAsset(const std::string&) {}
 
 	virtual void SetPos(const Math::Vector3& pos) { m_mWorld.Translation(pos); }
@@ -61,6 +73,7 @@ public:
 	float GetDistSqrFromCamera() const { return m_distSqrFromCamera; }
 
 	UINT GetDrawType() const { return m_drawType; }
+	UINT GetObjType() const { return m_objType; }
 
 	bool Intersects(const KdCollider::SphereInfo& targetShape, std::list<KdCollider::CollisionResult>* pResults);
 	bool Intersects(const KdCollider::BoxInfo& targetBox, std::list<KdCollider::CollisionResult>* pResults);
@@ -87,4 +100,7 @@ protected:
 
 	// デバッグ情報クラス
 	std::unique_ptr<KdDebugWireFrame> m_pDebugWire = nullptr;
+
+	//オブジェクトタイプ
+	UINT m_objType = None;
 };
