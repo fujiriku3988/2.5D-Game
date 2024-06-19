@@ -13,23 +13,22 @@ void Fire::Init()
 	dissolve = 0;
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("fire", { 0,0.5f,0 }, 0.3f, KdCollider::TypeDamage);
-	m_objType = KdGameObject::FireAttack;
+	m_objType = KdGameObject::eFireAttack;
 }
 
-void Fire::DrawLit()
+void Fire::DrawBright()
 {
-	dissolve += 0.006f;
-	if (dissolve > 1)
-	{
-		dissolve = 1.00f;
-	}
 	KdShaderManager::Instance().m_StandardShader.SetDissolve(dissolve);
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld);
 }
 
 void Fire::PreUpdate()
 {
-	
+	dissolve += 0.01f;
+	if (dissolve > 1)
+	{
+		dissolve = 1.00f;
+	}
 }
 
 void Fire::Update()
@@ -38,7 +37,7 @@ void Fire::Update()
 
 	m_dir = Math::Vector3::Right;
 	m_pos += m_dir*m_speed;
-	if (m_pos.x > 10)
+	if (dissolve == 1)
 	{
 		m_isExpired = true;
 	}
@@ -50,6 +49,10 @@ void Fire::PostUpdate()
 	transMat = Math::Matrix::CreateTranslation(m_pos);
 	rotMatX = Math::Matrix::CreateRotationX(0);
 	m_mWorld = scaleMat * rotMatX * transMat;
+}
+
+void Fire::GenerateDepthMapFromLight()
+{
 }
 
 void Fire::OnHit()

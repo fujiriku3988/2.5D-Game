@@ -1,10 +1,10 @@
 ﻿#pragma once
-class Tree :public KdGameObject
+class River :public KdGameObject
 {
 public:
 
-	Tree() {};
-	~Tree()override {};
+	River() {};
+	~River()override {};
 
 	void Init()override;
 	void Update()override;

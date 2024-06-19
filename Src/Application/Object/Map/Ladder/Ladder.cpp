@@ -1,18 +1,20 @@
-﻿#include "Tree.h"
+﻿#include "Ladder.h"
 
-void Tree::Init()
+void Ladder::Init()
 {
 	m_model = std::make_shared<KdModelData>();
-	m_model->Load("Asset/Models/Map/Tree/tree4.gltf");
+	m_model->Load("Asset/Models/Map/Ladder/Ladder2.gltf");
 	m_pos = {};
 	m_scale = { 1.0f };
 	m_rot = {};
+	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("TreeCollision", m_model, KdCollider::TypeGround);
+	m_pCollider->RegisterCollisionShape("LadderCollison", m_model, KdCollider::TypeEvent);
+	m_objType = KdGameObject::eLadder;
 }
 
-void Tree::Update()
+void Ladder::Update()
 {
 	Math::Matrix scaleMat = Math::Matrix::CreateScale(m_scale);
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
@@ -20,8 +22,7 @@ void Tree::Update()
 	m_mWorld = scaleMat * rotMatY * transMat;
 }
 
-void Tree::DrawLit()
+void Ladder::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);
 }
-

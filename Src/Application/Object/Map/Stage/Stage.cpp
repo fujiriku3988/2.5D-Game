@@ -3,14 +3,14 @@
 void Stage::Init()
 {
 	m_model = std::make_shared<KdModelData>();
-	m_model->Load("Asset/Models/Map/Stage/stage10.gltf");
+	m_model->Load("Asset/Models/Map/Stage/stage11.gltf");
 	m_pos = {};
 	m_scale = { 1.0f };
 	m_rot = {};
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("StageCollision", m_model, KdCollider::TypeGround);
-	m_objType = None;
+	m_objType = eStage;
 }
 
 void Stage::Update()

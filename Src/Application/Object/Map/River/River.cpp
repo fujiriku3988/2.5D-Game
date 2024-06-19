@@ -1,18 +1,18 @@
-﻿#include "Tree.h"
+﻿#include "River.h"
 
-void Tree::Init()
+void River::Init()
 {
 	m_model = std::make_shared<KdModelData>();
-	m_model->Load("Asset/Models/Map/Tree/tree4.gltf");
+	m_model->Load("Asset/Models/Map/River/river.gltf");
 	m_pos = {};
 	m_scale = { 1.0f };
 	m_rot = {};
 
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("TreeCollision", m_model, KdCollider::TypeGround);
+	m_pCollider->RegisterCollisionShape("RiverCollision", m_model, KdCollider::TypeGround);
 }
 
-void Tree::Update()
+void River::Update()
 {
 	Math::Matrix scaleMat = Math::Matrix::CreateScale(m_scale);
 	Math::Matrix transMat = Math::Matrix::CreateTranslation(m_pos);
@@ -20,8 +20,7 @@ void Tree::Update()
 	m_mWorld = scaleMat * rotMatY * transMat;
 }
 
-void Tree::DrawLit()
+void River::DrawLit()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);
 }
-

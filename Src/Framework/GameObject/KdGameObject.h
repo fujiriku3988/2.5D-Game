@@ -7,11 +7,14 @@ public:
 	//オブジェクトのタイプ
 	enum
 	{
-		None,
-		Player,
-		Enemy,
-		FireAttack,
-		MAX
+		eNone,
+		ePlayer,
+		eEnemy,
+		eFireAttack,
+		eHp,
+		eStage,
+		eLadder,
+		eMAX
 	};
 
 	// どのような描画を行うのかを設定するTypeID：Bitフラグで複数指定可能
@@ -102,5 +105,5 @@ protected:
 	std::unique_ptr<KdDebugWireFrame> m_pDebugWire = nullptr;
 
 	//オブジェクトタイプ
-	UINT m_objType = None;
+	UINT m_objType = eNone;
 };

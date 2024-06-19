@@ -103,8 +103,20 @@
     <Filter Include="Src\Application\Object\Effect\Fire">
       <UniqueIdentifier>{aaa09921-4dfc-4633-b72b-dee1337ca529}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Character\Player\Hp">
-      <UniqueIdentifier>{d3fc4115-3014-442e-a8b4-aaa11f25cf9e}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\Map\Ladder">
+      <UniqueIdentifier>{0833b1ea-5680-40b6-9ef4-3195905e2503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Map\River">
+      <UniqueIdentifier>{0f98cbde-3e8b-4b5e-a181-22da883a6c6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Character\Enemy02">
+      <UniqueIdentifier>{db2900db-1b77-4342-9650-cc570928daa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Character\Enemy03">
+      <UniqueIdentifier>{5bcc8a71-3db7-4474-b2b8-2398a8cf5788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Map\Goal">
+      <UniqueIdentifier>{a7582aca-2015-47cc-8e7e-fedfa1482964}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -297,8 +309,20 @@
     <ClInclude Include="Src\Application\Object\Effect\Fire\Fire.h">
       <Filter>Src\Application\Object\Effect\Fire</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Character\Player\Hp\Hp.h">
-      <Filter>Src\Application\Object\Character\Player\Hp</Filter>
+    <ClInclude Include="Src\Application\Object\Map\Ladder\Ladder.h">
+      <Filter>Src\Application\Object\Map\Ladder</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\River\River.h">
+      <Filter>Src\Application\Object\Map\River</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Character\Enemy02\Enemy02.h">
+      <Filter>Src\Application\Object\Character\Enemy02</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Character\Enemy03\Enemy03.h">
+      <Filter>Src\Application\Object\Character\Enemy03</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Goal\Goal.h">
+      <Filter>Src\Application\Object\Map\Goal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -467,8 +491,20 @@
     <ClCompile Include="Src\Application\Object\Effect\Fire\Fire.cpp">
       <Filter>Src\Application\Object\Effect\Fire</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Character\Player\Hp\Hp.cpp">
-      <Filter>Src\Application\Object\Character\Player\Hp</Filter>
+    <ClCompile Include="Src\Application\Object\Map\Ladder\Ladder.cpp">
+      <Filter>Src\Application\Object\Map\Ladder</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\River\River.cpp">
+      <Filter>Src\Application\Object\Map\River</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Character\Enemy02\Enemy02.cpp">
+      <Filter>Src\Application\Object\Character\Enemy02</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Character\Enemy03\Enemy03.cpp">
+      <Filter>Src\Application\Object\Character\Enemy03</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Goal\Goal.cpp">
+      <Filter>Src\Application\Object\Map\Goal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

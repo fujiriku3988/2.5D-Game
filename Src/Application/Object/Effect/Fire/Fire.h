@@ -8,10 +8,11 @@ public:
 	~Fire()override {}
 
 	void Init()override;
-	void DrawLit()override;
+	void DrawBright()override;
 	void PreUpdate()override;
 	void Update()override;
 	void PostUpdate()override;
+	void GenerateDepthMapFromLight()override;
 	void OnHit()override;
 
 	void SetEffectPoly(std::shared_ptr<BaseEffect>_poly) { m_wpPoly = _poly; }

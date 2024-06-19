@@ -2,7 +2,7 @@
 class CharacterBase :public KdGameObject
 {
 public:
-	CharacterBase() {};
+	CharacterBase() {}
 	~CharacterBase()override {};
 
 	void Init()override;
@@ -15,10 +15,9 @@ public:
 
 	void SetCharacterPoly(std::shared_ptr<CharacterBase>_poly) { m_wpPoly = _poly; }
 	void SetCharacterModel(std::shared_ptr<CharacterBase>_model) { m_wpModel = _model; }
-	
+	void SetPos(Math::Vector3 _pos) { m_pos = _pos; }
+
 protected:
-	//KdModelData m_model;
-	//KdSquarePolygon m_poly;
 	std::shared_ptr<KdSquarePolygon>m_poly = nullptr;
 	std::shared_ptr<KdModelData>m_model = nullptr;
 	std::weak_ptr<CharacterBase>m_wpPoly;

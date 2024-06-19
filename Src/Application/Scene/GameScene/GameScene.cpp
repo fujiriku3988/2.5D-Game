@@ -6,7 +6,10 @@
 #include"../../Object/Map/Tree/Tree.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/Character/Enemy01/Enemy01.h"
-#include"../../Object/Character/Player/Hp/Hp.h"
+#include"../../Object/Map/Ladder/Ladder.h"
+#include"../../Object/Map/River/River.h"
+#include"../../Object/Character/Enemy02/Enemy02.h"
+#include"../../Object/Map/Goal/Goal.h"
 using namespace std;
 
 void GameScene::Event()
@@ -64,9 +67,10 @@ void GameScene::Init()
 	m_camRad = 0.0f;
 
 	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, true);
-	KdShaderManager::Instance().WorkAmbientController().SetDistanceFog({ 1,1,1 }, 0.001);
+	KdShaderManager::Instance().WorkAmbientController().SetDistanceFog({ 1,1,1 }, 0.001f);
 	//KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1,1,1 }, 0, -1, 10);
 
+	//マップ関係
 	shared_ptr<Tile>tile = make_shared<Tile>();
 	tile->Init();
 	AddObject(tile);
@@ -82,14 +86,27 @@ void GameScene::Init()
 	shared_ptr<Tree>tree = make_shared<Tree>();
 	tree->Init();
 	AddObject(tree);
+
+	shared_ptr<River>river = make_shared<River>();
+	river->Init();
+	AddObject(river);
+
+	shared_ptr<Ladder>laddrer = make_shared<Ladder>();
+	laddrer->Init();
+	AddObject(laddrer);
+
+	shared_ptr<Goal>goal = make_shared<Goal>();
+	goal->Init();
+	AddObject(goal);
 	
+	//キャラクター
 	shared_ptr<Enemy01>enemy01 = make_shared<Enemy01>();
 	enemy01->Init();
 	AddObject(enemy01);
 
-	shared_ptr<Hp>hp = make_shared<Hp>();
-	hp->Init();
-	AddObject(hp);
+	shared_ptr<Enemy02>enemy02 = make_shared<Enemy02>();
+	enemy02->Init();
+	AddObject(enemy02);
 
 	shared_ptr<Player>player = make_shared<Player>();
 	player->Init();

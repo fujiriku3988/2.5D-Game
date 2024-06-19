@@ -9,12 +9,14 @@ void Enemy01::Init()
 	m_poly->SetMaterial("Asset/Textures/obj/enemy01/enemy01.png");
 	m_pos = { 1.5f,10,0.3f };
 	m_scale = { 1 };
+	m_color = { 1,1,1,1 };
 	m_speed = 0.1f;
 	m_poly->SetSplit(3, 4);
 	m_poly->SetUVRect(0);
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_fire = false;
 	m_coolTime = 30;
+	m_objType = KdGameObject::eEnemy;
 }
 
 void Enemy01::PreUpdate()
@@ -29,7 +31,7 @@ void Enemy01::PreUpdate()
 	{
 		fire = std::make_shared<Fire>();
 		fire->Init();
-		fire->SetFirePos(m_pos+Math::Vector3{0.5f,0.0f,0.0f});
+		fire->SetFirePos(m_pos+Math::Vector3{0.0f,0.0f,0.0f});
 		SceneManager::Instance().AddObject(fire);
 		m_coolTime = 30;
 		m_fire = false;

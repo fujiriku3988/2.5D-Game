@@ -7,11 +7,11 @@ void Player::Init()
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/player/player1.png");
 	m_pos = { 0,6,3 };
+	m_dir = {};
 	m_scale = { 1.0 };
 	m_speed = 0.05f;
 	m_poly->SetSplit(3, 4);
 	m_anime = 0;
-	m_hp = 2;
 	m_animeSpeed = 0.08f;
 	m_poly->SetUVRect(1);
 	Walk_Rflg = false;
@@ -22,13 +22,26 @@ void Player::Init()
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_color = { 1,1,1,1 };
 	m_time = 6;
+	m_objType = KdGameObject::ePlayer;
+	m_tex.Load("Asset/Textures/obj/player/hp03.png");
+	m_maxHp = 3;
+	m_nowHp = m_maxHp;
+	m_color = { 1,1,1,1 };
 }
 
 void Player::PreUpdate()
 {
+	if (m_nowHp <= 0)
+	{
+		m_nowHp = 0;
+		if (m_nowHp == 0)
+		{
+			m_isExpired = true;
+		}
+	}
 	// 前方向ベクトル
-	m_playerFowardVec = GetMatrix().Backward();
-	m_playerSideVec = GetMatrix().Right();
+	m_playerFowardVec = GetMatrix().Backward();//後ろ向き
+	m_playerSideVec = GetMatrix().Right();//右向き
 
 	//キャラアニメーション
 	if (GetAsyncKeyState('A') & 0x8000)
@@ -121,14 +134,16 @@ void Player::Update()
 {
 	m_pos += m_move;
 	m_move = { 0,0,0 };
+	m_pos.y += -m_gravity;
+	m_gravity += 0.003f;
+	//m_knock = 0.0f;
 
 	//プレイヤー動き
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
-		//m_move.x -= 0.1f;
-		//m_move.x -= m_speed;
 		m_move += m_playerSideVec * -m_speed;
 		m_anime += m_animeSpeed;
+		m_dir = GetMatrix().Left();
 		if (m_anime >= 4)
 		{
 			m_anime = 0;
@@ -137,10 +152,9 @@ void Player::Update()
 
 	if (GetAsyncKeyState('D') & 0x8000)
 	{
-		//m_move.x += 0.1f;
-		//m_move.x += m_speed;
 		m_move += m_playerSideVec * m_speed;
 		m_anime += m_animeSpeed;
+		m_dir = GetMatrix().Right();
 		if (m_anime >= 4)
 		{
 			m_anime = 0;
@@ -149,9 +163,9 @@ void Player::Update()
 
 	if (GetAsyncKeyState('W') & 0x8000)
 	{
-		//m_move.z += m_speed;
 		m_move += m_playerFowardVec * m_speed;
 		m_anime += m_animeSpeed;
+		m_dir = GetMatrix().Forward();
 		if (m_anime >= 4)
 		{
 			m_anime = 0;
@@ -160,9 +174,9 @@ void Player::Update()
 
 	if (GetAsyncKeyState('S') & 0x8000)
 	{
-		//m_move.z += -m_speed;
 		m_move += m_playerFowardVec * -m_speed;
 		m_anime += m_animeSpeed;
+		m_dir = GetMatrix().Backward();
 		if (m_anime >= 4)
 		{
 			m_anime = 0;
@@ -174,13 +188,18 @@ void Player::Update()
 	if (GetAsyncKeyState(VK_UP) & 0x8000) { m_rot.x += 0.05f; }
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_rot.x -= 0.05f; }
 
-	m_pos.y -= m_gravity;
-	m_gravity += 0.005f;
 
 }
 
 void Player::PostUpdate()
 {
+	if (m_pos.y < -20)
+	{
+		OnHit();
+		m_pos = { 0,6,3 };
+	}
+
+	//レイ飛ばして当たり判定
 	KdCollider::RayInfo ray;
 	ray.m_pos = m_pos;
 	ray.m_dir = Math::Vector3::Down;
@@ -240,18 +259,17 @@ void Player::PostUpdate()
 	{
 		if (obj->Intersects(sphere, &retSphereList))
 		{
-			if (obj->GetObjType() == KdGameObject::FireAttack)
+			if (obj->GetObjType() == KdGameObject::eFireAttack)
 			{
-				//m_isExpired = true;
 				obj->OnHit();
 				OnHit();
 			}
 		}
 	}
 	//球リストから一番近いオブジェクトを検出
-	maxOverLap = 0;		//はみ出た例の長さ
-	Math::Vector3 hitDir = {};		//レイが遮断された方向（当たった方向）
-	ishit = false;			//当たっていたらレイ
+	maxOverLap = 0;
+	Math::Vector3 hitDir = {};
+	ishit = false;
 	for (auto& ret : retSphereList)
 	{
 		if (maxOverLap < ret.m_overlapDistance)
@@ -264,13 +282,57 @@ void Player::PostUpdate()
 	}
 	if (ishit)
 	{
-		if (sphere.m_type == KdCollider::TypeGround)
+		//方向ベクトルは長さ１にする必要がある 
+		hitDir.Normalize();
+		//押し戻し
+		m_pos += hitDir * maxOverLap;
+	}
+
+	////////////////////////////////////
+	//球判定用の変数を作成
+	KdCollider::SphereInfo sphere2;//スフィア
+	//球の中心位置を設定
+	sphere2.m_sphere.Center = m_pos + Math::Vector3{ 0,0.5,0 };
+	//球の半径を設定
+	sphere2.m_sphere.Radius = 0.3f;
+	//当たり判定をしたいタイプを設定
+	sphere2.m_type = KdCollider::TypeEvent;
+	m_pDebugWire->AddDebugSphere(sphere2.m_sphere.Center, sphere2.m_sphere.Radius);
+	//球が当たったオブジェクトの情報を格納するリスト
+	//std::list<KdCollider::CollisionResult> retSphereList;
+	//球と当たり判定！！！！！！
+	for (auto& obj : SceneManager::Instance().GetObjList())
+	{
+		if (obj->Intersects(sphere2, &retSphereList))
 		{
-			//方向ベクトルは長さ１にする必要がある 
-			hitDir.Normalize();
-			//押し戻し
-			m_pos += hitDir * maxOverLap;
+			if (obj->GetObjType() == KdGameObject::eLadder)
+			{
+				//obj->OnHit();
+				OnHitLadder();
+			}
 		}
+	}
+	//球リストから一番近いオブジェクトを検出
+	maxOverLap = 0;
+	hitDir = {};
+	ishit = false;
+	for (auto& ret : retSphereList)
+	{
+		if (maxOverLap < ret.m_overlapDistance)
+		{
+			maxOverLap = ret.m_overlapDistance;
+			hitDir = ret.m_hitDir;//当たった方向
+			ishit = true;
+		}
+
+	}
+	if (ishit)
+	{
+		//方向ベクトルは長さ１にする必要がある 
+		//hitDir.Normalize();
+		//押し戻し
+		//m_pos += hitDir * maxOverLap;
+		//OnHitLadder();
 	}
 
 	scaleMat = Math::Matrix::CreateScale(m_scale);
@@ -281,8 +343,26 @@ void Player::PostUpdate()
 	m_mWorld = scaleMat * rotMatY * transMat;
 }
 
+void Player::DrawSprite()
+{
+	m_rect = { 0,0,32 * m_nowHp,32 };
+	m_color = { 1,1,1,1 };
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex, m_pos.x, m_pos.y, 32 * m_nowHp, 32, &m_rect, &m_color);
+}
+
 void Player::OnHit()
 {
 	m_hitFlg = true;
-	m_hp--;
+	m_nowHp--;
+	Math::Vector3 a = GetMatrix().Forward();
+	Math::Vector3 b = GetMatrix().Backward();
+	//m_pos += m_playerFowardVec * 2;
+	m_pos += m_dir * 2;
+}
+
+void Player::OnHitLadder()
+{
+	Math::Vector3 Up;
+	//m_pos.y += m_gravity;
+	m_gravity = -0.05f;
 }

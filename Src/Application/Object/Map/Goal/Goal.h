@@ -1,18 +1,18 @@
 ﻿#pragma once
-class Tree :public KdGameObject
+class Goal :public KdGameObject
 {
 public:
 
-	Tree() {};
-	~Tree()override {};
+	Goal() {};
+	~Goal()override {};
 
 	void Init()override;
 	void Update()override;
 	void DrawLit()override;
-
+	void DrawBright()override;
 
 private:
-	std::shared_ptr<KdModelData> m_model;
+	std::shared_ptr<KdSquarePolygon>m_poly = nullptr;
 	Math::Vector3 m_pos;
 	Math::Vector3 m_rot;
 	Math::Vector3 m_scale;

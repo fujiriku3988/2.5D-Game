@@ -1,12 +1,11 @@
 ﻿#pragma once
 #include"../../Character/CharacterBase.h"
-class Fire;
-class Enemy01 :public CharacterBase
+class Enemy02 :public CharacterBase
 {
 public:
 
-	Enemy01() {};
-	~Enemy01()override {};
+	Enemy02() {};
+	~Enemy02()override {};
 
 	void Init()override;
 	void PreUpdate()override;
@@ -14,7 +13,6 @@ public:
 	void PostUpdate()override;
 
 private:
-	std::shared_ptr<Fire>fire = nullptr;
-	int m_coolTime=0;
-	bool m_fire=false;
+	int m_coolTime = 0;
+	bool m_fire = false;
 };
