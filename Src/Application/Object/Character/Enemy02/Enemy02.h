@@ -13,6 +13,6 @@ public:
 	void PostUpdate()override;
 
 private:
-	int m_coolTime = 0;
-	bool m_fire = false;
+	float m_angle;
+	int m_fly[5] = { 0,1,2,3,4 };
 };

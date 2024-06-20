@@ -16,4 +16,7 @@ private:
 	Math::Vector3 m_pos;
 	Math::Vector3 m_rot;
 	Math::Vector3 m_scale;
+	Math::Color m_color;
+	float m_alpha;
+	float m_alSpeed;
 };

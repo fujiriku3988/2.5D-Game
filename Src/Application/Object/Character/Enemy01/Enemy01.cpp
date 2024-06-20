@@ -7,7 +7,7 @@ void Enemy01::Init()
 	CharacterBase::Init();
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/enemy01/enemy01.png");
-	m_pos = { 1.5f,10,0.3f };
+	m_pos = { 1.1f,5,0.3f };
 	m_scale = { 1 };
 	m_color = { 1,1,1,1 };
 	m_speed = 0.1f;
@@ -17,6 +17,8 @@ void Enemy01::Init()
 	m_fire = false;
 	m_coolTime = 30;
 	m_objType = KdGameObject::eEnemy;
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape("dragon", { 0,0.5f,0 }, 0.3f, KdCollider::TypeDamage);
 }
 
 void Enemy01::PreUpdate()
@@ -40,6 +42,8 @@ void Enemy01::PreUpdate()
 
 void Enemy01::Update()
 {
+	m_pDebugWire->AddDebugSphere(m_pos + Math::Vector3{ 0,0.5f,0 }, 0.3f, kGreenColor);
+
 	m_gravity += 0.005f;
 	m_pos.y -= m_gravity;
 }
@@ -96,7 +100,7 @@ void Enemy01::PostUpdate()
 	//球の半径を設定
 	sphere.m_sphere.Radius = 0.3f;
 	//当たり判定をしたいタイプを設定
-	sphere.m_type = KdCollider::TypeGround;
+	//sphere.m_type = KdCollider::TypeGround;
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
 	//球が当たったオブジェクトの情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retSphereList;

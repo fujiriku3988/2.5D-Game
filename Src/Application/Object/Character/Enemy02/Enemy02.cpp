@@ -6,25 +6,45 @@ void Enemy02::Init()
 	CharacterBase::Init();
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/enemy02/enemy02.png");//横１列の画像,rectでアニメーション
-	m_pos = { 1.5f,10,1.f };
+	m_pos = { -1.f,5.f,7.f };
 	m_scale = { 1 };
 	m_color = { 1,1,1,1 };
 	m_speed = 0.1f;
+	m_angle = 0;
+	m_anime = 0;
+	m_animeSpeed = 0.1f;
 	m_poly->SetSplit(5, 1);
 	m_poly->SetUVRect(0);
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_objType = KdGameObject::eEnemy;
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape("bee", { 0,0.5f,0 }, 0.4f, KdCollider::TypeDamage);
 }
 
 void Enemy02::PreUpdate()
 {
+	m_anime += m_animeSpeed;
+	m_poly->SetUVRect(m_fly[(int)m_anime]);
+	if (m_anime > 4)
+	{
+		m_anime = 0;
+	}
 }
 
 void Enemy02::Update()
 {
+	m_pDebugWire->AddDebugSphere(m_pos + Math::Vector3{ 0,0.5f,0 }, 0.3f, kGreenColor);
+
 	//サインカーブをやる
-	m_gravity += 0.005f;
-	m_pos.y -= m_gravity;
+	m_angle += 1.0f;
+	if (m_angle >= 360.0f)
+	{
+		m_angle += -360.0f;
+	}
+	m_pos.y += sin(DirectX::XMConvertToRadians(m_angle))*0.02;
+
+	//m_gravity += 0.005f;
+	//m_pos.y -= m_gravity;
 }
 
 void Enemy02::PostUpdate()

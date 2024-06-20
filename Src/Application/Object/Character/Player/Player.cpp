@@ -36,7 +36,7 @@ void Player::PreUpdate()
 		m_nowHp = 0;
 		if (m_nowHp == 0)
 		{
-			m_isExpired = true;
+			//m_isExpired = true;
 		}
 	}
 	// 前方向ベクトル
@@ -136,7 +136,11 @@ void Player::Update()
 	m_move = { 0,0,0 };
 	m_pos.y += -m_gravity;
 	m_gravity += 0.003f;
-	//m_knock = 0.0f;
+
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	{
+		m_gravity = -0.05f;
+	}
 
 	//プレイヤー動き
 	if (GetAsyncKeyState('A') & 0x8000)
@@ -185,9 +189,6 @@ void Player::Update()
 
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { m_rot.y -= 0.05f; }
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000) { m_rot.y += 0.05f; }
-	if (GetAsyncKeyState(VK_UP) & 0x8000) { m_rot.x += 0.05f; }
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) { m_rot.x -= 0.05f; }
-
 
 }
 
@@ -262,6 +263,10 @@ void Player::PostUpdate()
 			if (obj->GetObjType() == KdGameObject::eFireAttack)
 			{
 				obj->OnHit();
+				OnHit();
+			}
+			if (obj->GetObjType() == KdGameObject::eEnemy)
+			{
 				OnHit();
 			}
 		}
@@ -357,12 +362,10 @@ void Player::OnHit()
 	Math::Vector3 a = GetMatrix().Forward();
 	Math::Vector3 b = GetMatrix().Backward();
 	//m_pos += m_playerFowardVec * 2;
-	m_pos += m_dir * 2;
+	m_pos += m_dir * 1.5;
 }
 
 void Player::OnHitLadder()
 {
-	Math::Vector3 Up;
-	//m_pos.y += m_gravity;
 	m_gravity = -0.05f;
 }
