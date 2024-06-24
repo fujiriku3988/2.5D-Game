@@ -3,7 +3,7 @@
 void River::Init()
 {
 	m_model = std::make_shared<KdModelData>();
-	m_model->Load("Asset/Models/Map/River/river.gltf");
+	m_model->Load("Asset/Models/Map/River/river2.gltf");
 	m_pos = {};
 	m_scale = { 1.0f };
 	m_rot = {};

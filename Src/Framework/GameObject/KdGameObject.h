@@ -14,6 +14,12 @@ public:
 		eHp,
 		eStage,
 		eLadder,
+		eGoal,
+		eGate01,
+		eGate02,
+		eGate03,
+		eGate04,
+		eGate05,
 		eMAX
 	};
 

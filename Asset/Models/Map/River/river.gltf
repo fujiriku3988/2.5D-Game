@@ -13,9 +13,7 @@
 				2,
 				3,
 				4,
-				5,
-				6,
-				7
+				5
 			]
 		}
 	],
@@ -104,35 +102,6 @@
 		},
 		{
 			"mesh":5,
-			"name":"rock_low.002_Group58368.002",
-			"rotation":[
-				0.70710688829422,
-				0,
-				0,
-				0.7071066498756409
-			],
-			"translation":[
-				-5.365821361541748,
-				-3.863345146179199,
-				-8.843836784362793
-			]
-		},
-		{
-			"mesh":6,
-			"name":"COL.003",
-			"scale":[
-				0.800000011920929,
-				0.800000011920929,
-				0.800000011920929
-			],
-			"translation":[
-				-8.586748123168945,
-				3.4102847576141357,
-				-7.920398712158203
-			]
-		},
-		{
-			"mesh":7,
 			"name":"COL.002",
 			"scale":[
 				0.6000000238418579,
@@ -187,14 +156,6 @@
 				],
 				"metallicFactor":0,
 				"roughnessFactor":0.5
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"\u30de\u30c6\u30ea\u30a2\u30eb",
-			"pbrMetallicRoughness":{
-				"metallicFactor":0.2110091745853424,
-				"roughnessFactor":0.44954127073287964
 			}
 		}
 	],
@@ -268,40 +229,13 @@
 			]
 		},
 		{
-			"name":"rock_low.002_Group58368.002",
+			"name":"\u7acb\u65b9\u4f53.001",
 			"primitives":[
 				{
 					"attributes":{
 						"POSITION":17,
 						"NORMAL":18,
 						"TEXCOORD_0":19
-					},
-					"indices":20,
-					"material":3
-				}
-			]
-		},
-		{
-			"name":"\u7acb\u65b9\u4f53",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":21,
-						"NORMAL":22,
-						"TEXCOORD_0":23
-					},
-					"indices":13
-				}
-			]
-		},
-		{
-			"name":"\u7acb\u65b9\u4f53.001",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":24,
-						"NORMAL":25,
-						"TEXCOORD_0":26
 					},
 					"indices":13
 				}
@@ -464,68 +398,6 @@
 		{
 			"bufferView":17,
 			"componentType":5126,
-			"count":552,
-			"max":[
-				-2.3644399642944336,
-				1.935560941696167,
-				-6.483735084533691
-			],
-			"min":[
-				-4.145153999328613,
-				-0.021480999886989594,
-				-7.99871301651001
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":18,
-			"componentType":5126,
-			"count":552,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":19,
-			"componentType":5126,
-			"count":552,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":20,
-			"componentType":5123,
-			"count":2970,
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":21,
-			"componentType":5126,
-			"count":24,
-			"max":[
-				1,
-				1,
-				1
-			],
-			"min":[
-				-1.075221300125122,
-				-1,
-				-1
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":22,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":23,
-			"componentType":5126,
-			"count":24,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":24,
-			"componentType":5126,
 			"count":24,
 			"max":[
 				0.9272518157958984,
@@ -540,13 +412,13 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":25,
+			"bufferView":18,
 			"componentType":5126,
 			"count":24,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":26,
+			"bufferView":19,
 			"componentType":5126,
 			"count":24,
 			"type":"VEC2"
@@ -657,68 +529,26 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":6624,
+			"byteLength":288,
 			"byteOffset":3024,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":6624,
-			"byteOffset":9648,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":4416,
-			"byteOffset":16272,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":5940,
-			"byteOffset":20688,
-			"target":34963
-		},
-		{
-			"buffer":0,
 			"byteLength":288,
-			"byteOffset":26628,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":26916,
+			"byteOffset":3312,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":192,
-			"byteOffset":27204,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":27396,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":288,
-			"byteOffset":27684,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":192,
-			"byteOffset":27972,
+			"byteOffset":3600,
 			"target":34962
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":28164,
+			"byteLength":3792,
 			"uri":"river.bin"
 		}
 	]

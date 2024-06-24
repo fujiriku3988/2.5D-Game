@@ -6,7 +6,7 @@ void Goal::Init()
 	m_poly->SetMaterial("Asset/Textures/obj/goal/aura01.png");
 	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_pos = { 14,4.f,10.8 };
-	m_scale = { 3.0f };
+	m_scale = { 4.0f };
 	m_rot = {};
 	m_poly->SetSplit(8, 4);
 	m_poly->SetUVRect(0);
@@ -14,7 +14,8 @@ void Goal::Init()
 	m_alpha = 1.5;
 	m_alSpeed = 0.01f;
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("GoalCollision", m_poly, KdCollider::TypeGround);
+	m_pCollider->RegisterCollisionShape("Goal", { 0,0.5f,0.0f }, 0.1f, KdCollider::TypeEvent);
+	m_objType = KdGameObject::eGoal;
 }
 
 void Goal::Update()
@@ -39,9 +40,4 @@ void Goal::DrawLit()
 {
 	m_color = { 10,10,10,m_alpha };
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld, m_color);
-}
-
-void Goal::DrawBright()
-{
-	
 }

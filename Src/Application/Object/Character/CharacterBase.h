@@ -2,6 +2,13 @@
 class CharacterBase :public KdGameObject
 {
 public:
+	//アニメーション情報
+	struct AnimetionInfo
+	{
+		float count;//現在のコマ数カウント
+		float speed;//アニメーションの速度
+	};
+
 	CharacterBase() {}
 	~CharacterBase()override {};
 
@@ -23,20 +30,23 @@ protected:
 	std::weak_ptr<CharacterBase>m_wpPoly;
 	std::weak_ptr<CharacterBase>m_wpModel;
 	KdTexture m_tex;
+	Math::Vector2 m_texSize;
+	Math::Rectangle m_rect;
 	Math::Vector3 m_pos;
-	Math::Vector3 m_move;
+	Math::Vector2 m_spritePos;
 	Math::Vector3 m_dir;
 	Math::Vector3 m_rot;
 	Math::Vector3 m_scale;
 	Math::Color m_color;
 	float m_speed;
+	float m_gravity;
+	//行列
 	Math::Matrix scaleMat;
 	Math::Matrix transMat;
 	Math::Matrix rotMatX;
 	Math::Matrix rotMatY;
 	Math::Matrix rotMatZ;
 	//アニメーション
-	float m_anime;
-	float m_animeSpeed;
-	float m_gravity;
+	AnimetionInfo m_anime;
+	int m_animeCnt;
 };

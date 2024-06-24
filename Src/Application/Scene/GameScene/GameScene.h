@@ -16,5 +16,4 @@ private:
 	Math::Vector3 m_camPos;
 	Math::Vector3 m_camRot;
 	float m_camRad;
-	std::weak_ptr<Player>m_player;
 };

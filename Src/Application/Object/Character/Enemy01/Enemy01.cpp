@@ -7,7 +7,7 @@ void Enemy01::Init()
 	CharacterBase::Init();
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/enemy01/enemy01.png");
-	m_pos = { 1.1f,5,0.3f };
+	m_pos = {};
 	m_scale = { 1 };
 	m_color = { 1,1,1,1 };
 	m_speed = 0.1f;
@@ -42,7 +42,7 @@ void Enemy01::PreUpdate()
 
 void Enemy01::Update()
 {
-	m_pDebugWire->AddDebugSphere(m_pos + Math::Vector3{ 0,0.5f,0 }, 0.3f, kGreenColor);
+	//m_pDebugWire->AddDebugSphere(m_pos + Math::Vector3{ 0,0.5f,0 }, 0.3f, kGreenColor);
 
 	m_gravity += 0.005f;
 	m_pos.y -= m_gravity;
@@ -70,7 +70,7 @@ void Enemy01::PostUpdate()
 	}
 
 	//デバッグ（レイ可視化）
-	m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range);
+	//m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range);
 
 	float maxOverLap = 0;	//はみ出たレイの長さ
 	Math::Vector3 hitPos;	//レイが遮断された座標（当たった座標）
@@ -101,7 +101,7 @@ void Enemy01::PostUpdate()
 	sphere.m_sphere.Radius = 0.3f;
 	//当たり判定をしたいタイプを設定
 	//sphere.m_type = KdCollider::TypeGround;
-	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
+	//m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius);
 	//球が当たったオブジェクトの情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retSphereList;
 	//球と当たり判定！！！！！！

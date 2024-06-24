@@ -33,7 +33,7 @@ void Fire::PreUpdate()
 
 void Fire::Update()
 {
-	m_pDebugWire->AddDebugSphere(m_pos+Math::Vector3{0,0.5f,0}, 0.3f, kGreenColor);
+	//m_pDebugWire->AddDebugSphere(m_pos+Math::Vector3{0,0.5f,0}, 0.3f, kGreenColor);
 
 	m_dir = Math::Vector3::Right;
 	m_pos += m_dir*m_speed;

@@ -82,9 +82,6 @@
     <Filter Include="Src\Application\Object\Map\Stage">
       <UniqueIdentifier>{82201351-de9f-4391-b8ed-b3a69c033798}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Map\Tile">
-      <UniqueIdentifier>{d2edf304-b6a7-49ed-b19b-43b48cded0ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\Character">
       <UniqueIdentifier>{07447afb-b08a-4031-bb1c-7cd32bb0f4c2}</UniqueIdentifier>
     </Filter>
@@ -117,6 +114,24 @@
     </Filter>
     <Filter Include="Src\Application\Object\Map\Goal">
       <UniqueIdentifier>{a7582aca-2015-47cc-8e7e-fedfa1482964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Map\Warp">
+      <UniqueIdentifier>{6d981e74-53de-4c57-992e-3f69d17b271d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Map\Warp\Gate">
+      <UniqueIdentifier>{1706b5d3-f2a6-4ead-af6c-485dd3327a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Camera">
+      <UniqueIdentifier>{059e2cfb-f8d4-4e23-b0a2-9f410ac2dde5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Fade">
+      <UniqueIdentifier>{9db7437c-b9c5-49d3-aaca-6e7134bc80a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\UI">
+      <UniqueIdentifier>{f7679f05-f7b8-44d7-9825-6bbe06f0712f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Scene\Text">
+      <UniqueIdentifier>{3eed745a-6bdb-46c1-a13e-4d8db7f4ccf3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -282,14 +297,11 @@
     <ClInclude Include="..\Library\imgui\imstb_truetype.h">
       <Filter>Library\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Map\BackGround\BackGround.h">
+    <ClInclude Include="Src\Application\Object\Map\BackGround\BackGround01.h">
       <Filter>Src\Application\Object\Map\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Map\Stage\Stage.h">
       <Filter>Src\Application\Object\Map\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Map\Tile\Tile.h">
-      <Filter>Src\Application\Object\Map\Tile</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Character\CharacterBase.h">
       <Filter>Src\Application\Object\Character</Filter>
@@ -323,6 +335,48 @@
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Map\Goal\Goal.h">
       <Filter>Src\Application\Object\Map\Goal</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Warp.h">
+      <Filter>Src\Application\Object\Map\Warp</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Gate\Gate01.h">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Gate\Gate02.h">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Gate\Gate03.h">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Gate\Gate04.h">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Gate\Gate05.h">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\Warp\Gate\BaseGate.h">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Camera\Camera.h">
+      <Filter>Src\Application\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Fade\Fade.h">
+      <Filter>Src\Application\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Map\BackGround\BackGround02.h">
+      <Filter>Src\Application\Object\Map\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Character\Player\TitlePlayer.h">
+      <Filter>Src\Application\Object\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\Text\GameClear.h">
+      <Filter>Src\Application\Scene\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\Text\Title.h">
+      <Filter>Src\Application\Scene\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\Text\Click.h">
+      <Filter>Src\Application\Scene\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -464,14 +518,11 @@
     <ClCompile Include="..\Library\imgui\imgui_widgets.cpp">
       <Filter>Library\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Map\BackGround\BackGround.cpp">
+    <ClCompile Include="Src\Application\Object\Map\BackGround\BackGround01.cpp">
       <Filter>Src\Application\Object\Map\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Map\Stage\Stage.cpp">
       <Filter>Src\Application\Object\Map\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Map\Tile\Tile.cpp">
-      <Filter>Src\Application\Object\Map\Tile</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Character\CharacterBase.cpp">
       <Filter>Src\Application\Object\Character</Filter>
@@ -505,6 +556,48 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Map\Goal\Goal.cpp">
       <Filter>Src\Application\Object\Map\Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Warp.cpp">
+      <Filter>Src\Application\Object\Map\Warp</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Gate\Gate01.cpp">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Gate\Gate02.cpp">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Gate\Gate03.cpp">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Gate\Gate04.cpp">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Gate\Gate05.cpp">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\Warp\Gate\BaseGate.cpp">
+      <Filter>Src\Application\Object\Map\Warp\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Camera\Camera.cpp">
+      <Filter>Src\Application\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Fade\Fade.cpp">
+      <Filter>Src\Application\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Map\BackGround\BackGround02.cpp">
+      <Filter>Src\Application\Object\Map\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Character\Player\TitlePlayer.cpp">
+      <Filter>Src\Application\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\Text\GameClear.cpp">
+      <Filter>Src\Application\Scene\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\Text\Title.cpp">
+      <Filter>Src\Application\Scene\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\Text\Click.cpp">
+      <Filter>Src\Application\Scene\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,18 +4,20 @@ void CharacterBase::Init()
 {
 	m_pos = { };
 	m_scale = { 1 };
-	m_move = {};
+	m_spritePos = {};
 	m_poly = nullptr;
 	m_model = nullptr;
+	m_texSize = {};
 	scaleMat = Math::Matrix::Identity;
 	transMat = Math::Matrix::Identity;
 	rotMatX = Math::Matrix::Identity;
 	rotMatY = Math::Matrix::Identity;
 	rotMatZ = Math::Matrix::Identity;
-	m_gravity = 0;
-	m_anime = 0;
-	m_animeSpeed = 0;
-	m_speed = 0;
+	m_gravity = 0.0f;
+	m_speed = 0.0f;
+	m_animeCnt = 0;
+	m_anime.count = 0;
+	m_anime.speed = 0;
 	//デバッグ用
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }
@@ -46,14 +48,6 @@ void CharacterBase::DrawLit()
 
 void CharacterBase::DrawSprite()
 {
-	if (m_model)
-	{
-		KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld, m_color);
-	}
-	if (m_poly)
-	{
-		KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_poly, m_mWorld, m_color);
-	}
 }
 
 void CharacterBase::GenerateDepthMapFromLight()

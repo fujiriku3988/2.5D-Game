@@ -9,7 +9,6 @@ public:
 	void Init()override;
 	void Update()override;
 	void DrawLit()override;
-	void DrawBright()override;
 
 private:
 	std::shared_ptr<KdSquarePolygon>m_poly = nullptr;

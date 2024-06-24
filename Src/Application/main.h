@@ -20,6 +20,7 @@ public:
 
 	int GetNowFPS() const { return m_fpsController.m_nowfps; }
 	int GetMaxFPS() const { return m_fpsController.m_maxFps; }
+	
 
 private:
 
@@ -36,11 +37,13 @@ private:
 	void DrawSprite();
 	void KdPostDraw();
 
+
 	// アプリケーション初期化
 	bool Init(int w, int h);
 
 	// アプリケーション解放
 	void Release();
+	
 	
 	//ImGui
 	void ImGuiProcess();

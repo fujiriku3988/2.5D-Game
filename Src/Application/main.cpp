@@ -211,14 +211,6 @@ bool Application::Init(int w, int h)
 	// 日本語対応
 	io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msgothic.ttc", 13.0f, &config, glyphRangesJapanese);
 
-//#include "imgui/ja_glyph_ranges.h"
-//	ImGuiIO& io = ImGui::GetIO();
-//	ImFontConfig config;
-//	config.MergeMode = true;
-//	io.Fonts->AddFontDefault();
-//	//日本語対応
-//	io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msgothic.ttc", 13.0f, &config, glyphRangesJapanese);
-
 	//===================================================================
 	// シェーダー初期化
 	//===================================================================
@@ -330,6 +322,10 @@ void Application::Execute()
 		//=========================================
 
 		m_fpsController.Update();
+
+		//ゲームルーブ内
+		std::string titleBar = "ESCAPE FROM THE WORLD fps" + std::to_string(m_fpsController.m_nowfps);
+		SetWindowTextA(m_window.GetWndHandle(), titleBar.c_str());
 	}
 
 	//===================================================================
@@ -361,8 +357,7 @@ void Application::Release()
 void Application::ImGuiProcess()
 {
 	//本当はフラグでオンとオフ切り替えた方がいい
-	return
-
+	return;
 	// ImGui開始
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
