@@ -7,6 +7,7 @@ void CharacterBase::Init()
 	m_spritePos = {};
 	m_poly = nullptr;
 	m_model = nullptr;
+	m_hitFlg = false;
 	m_texSize = {};
 	scaleMat = Math::Matrix::Identity;
 	transMat = Math::Matrix::Identity;
@@ -16,8 +17,11 @@ void CharacterBase::Init()
 	m_gravity = 0.0f;
 	m_speed = 0.0f;
 	m_animeCnt = 0;
+	m_animeCntMAX = 0;
 	m_anime.count = 0;
 	m_anime.speed = 0;
+	m_vol.walk = 1.0f;
+	m_vol.damage = 1.0f;
 	//デバッグ用
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }

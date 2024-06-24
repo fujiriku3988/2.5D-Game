@@ -34,4 +34,6 @@ protected:
 	//アニメーション
 	float m_anime;
 	float m_animeSpeed;
+	//音量
+	float m_vol;
 };

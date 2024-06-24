@@ -11,7 +11,9 @@ void Goal::Init()
 	m_poly->SetSplit(8, 4);
 	m_poly->SetUVRect(0);
 	m_color = { 1,1,1,1 };
-	m_alpha = 1.5;
+	m_alphaMAX = 1.5f;
+	m_alpha = m_alphaMAX;
+	m_alphaMIN = 0.5f;
 	m_alSpeed = 0.01f;
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Goal", { 0,0.5f,0.0f }, 0.1f, KdCollider::TypeEvent);
@@ -21,11 +23,11 @@ void Goal::Init()
 void Goal::Update()
 {
 	m_alpha += -m_alSpeed;
-	if (m_alpha < 0.5)
+	if (m_alpha < m_alphaMIN)
 	{
 		m_alSpeed *= -1;
 	}
-	if (m_alpha > 1.5)
+	if (m_alpha > m_alphaMAX)
 	{
 		m_alSpeed *= -1;
 	}

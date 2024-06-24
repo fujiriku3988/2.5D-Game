@@ -56,7 +56,7 @@ void TitlePlayer::PostUpdate()
 
 void TitlePlayer::DrawSprite()
 {
-	m_rect = { 47* Walk_U[m_animeCnt],49 * 3,47,49 };
+	m_rect = { (long)m_texSize .x* Walk_U[m_animeCnt],(long)m_texSize.y * 3,(long)m_texSize.x,(long)m_texSize.y };
 	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex, m_spritePos.x, m_spritePos.y,
 														m_texSize.x * m_scale.x, m_texSize.y * m_scale.y,
 														&m_rect, &m_color);

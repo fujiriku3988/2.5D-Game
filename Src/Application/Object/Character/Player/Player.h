@@ -26,7 +26,6 @@ public:
 	void OnHitGoal();
 	//セッター
 	void SetCamera(std::shared_ptr<Camera>_camera) { m_wpCamera = _camera; }
-	void SetCameraPos(Math::Vector3 _camPos) { m_camPos = _camPos; }//カメラのpos座標（使うかも）
 	void ResetRot() { m_rot = {}; }
 	//ゲッター
 private:
@@ -43,10 +42,8 @@ private:
 	int Walk_D[4] = {0,1,2,1};//下
 	int m_walkWait;
 	//当たり判定で使う変数
-	bool m_hitFlg = false;
-	int m_time = 0;
-	//カメラの座標
-	Math::Vector3 m_camPos;
+	int m_time;
+	int m_timeFrame;
 	//プレイヤーベクトル
 	Math::Vector3 m_playerFowardVec;//前ベクター
 	Math::Vector3 m_playerSideVec;//横ベクター

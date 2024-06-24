@@ -8,6 +8,8 @@ void Click::Init()
 	m_scale = { 1 };
 	m_texSize = { 496,75 };
 	m_alpha = 1.0f;
+	m_alphaMAX = 1.0f;
+	m_alphaMIN = 0.4f;
 	speed = -0.01f;
 	m_clickFlg = false;
 	m_color = { 1.0f,1.0f,1.0f,1.0f };
@@ -20,11 +22,11 @@ void Click::Update()
 
 		//α値変更
 		m_alpha += speed;
-		if (m_alpha < 0.4f)
+		if (m_alpha < m_alphaMIN)
 		{
 			speed *= -1;
 		}
-		if (m_alpha > 1.0f)
+		if (m_alpha > m_alphaMAX)
 		{
 			speed *= -1;
 		}

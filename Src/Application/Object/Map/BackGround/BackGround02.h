@@ -13,10 +13,8 @@ public:
 
 private:
 	KdTexture m_tex01;
-	KdTexture m_tex02;
-	Math::Vector3 m_pos;
-	Math::Vector3 m_rot;
-	Math::Vector3 m_scale;
+	Math::Vector2 m_texSize;
+	Math::Vector3 m_spritePos;
 	Math::Color m_color;
 	Math::Rectangle m_rect;
 };

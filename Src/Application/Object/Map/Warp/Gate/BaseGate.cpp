@@ -19,6 +19,7 @@ void BaseGate::Init()
 	rotMatZ = Math::Matrix::Identity;
 	m_anime = 0;
 	m_animeSpeed = 0.2f;
+	m_vol = 1.0f;
 	//デバッグ用
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }

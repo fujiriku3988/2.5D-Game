@@ -38,4 +38,12 @@ protected :
 
 	// 全オブジェクトのアドレスをリストで管理
 	std::list<std::shared_ptr<KdGameObject>> m_objList;
+
+	//音量
+	struct volume
+	{
+		float click;
+		float BGM;
+	};
+	volume m_vol;
 };

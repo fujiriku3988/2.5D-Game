@@ -9,13 +9,15 @@ void GameClear::Init()
 	m_texSize = { 355,79 };
 	m_time = 120.0f;
 	m_alpha = 0.0f;
+	m_alphaMAX = 1.0f;
+	m_alphaSpeed = 0.001f;
 	m_color = { 1.0f,1.0f,1.0f,m_alpha };
 }
 
 void GameClear::Update()
 {
 	m_time--;
-	m_alpha += 0.001f;
+	m_alpha += m_alphaSpeed;
 
 	if (m_time <= 0)
 	{
@@ -26,9 +28,9 @@ void GameClear::Update()
 	{
 		Fade::Instance().BootBlackFade(SceneManager::SceneType::Title);
 	}
-	if (m_alpha >= 1.0f)
+	if (m_alpha >= m_alphaMAX)
 	{
-		m_alpha = 1.0f;
+		m_alpha = m_alphaMAX;
 	}
 }
 

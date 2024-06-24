@@ -40,6 +40,7 @@ protected:
 	Math::Color m_color;
 	float m_speed;
 	float m_gravity;
+	bool m_hitFlg = false;
 	//行列
 	Math::Matrix scaleMat;
 	Math::Matrix transMat;
@@ -49,4 +50,12 @@ protected:
 	//アニメーション
 	AnimetionInfo m_anime;
 	int m_animeCnt;
+	int m_animeCntMAX;
+	//音量
+	struct volume
+	{
+		float walk;
+		float damage;
+	};
+	volume m_vol;
 };

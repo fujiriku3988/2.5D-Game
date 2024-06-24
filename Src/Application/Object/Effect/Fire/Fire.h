@@ -9,7 +9,6 @@ public:
 
 	void Init()override;
 	void DrawBright()override;
-	void PreUpdate()override;
 	void Update()override;
 	void PostUpdate()override;
 	void GenerateDepthMapFromLight()override;
@@ -18,5 +17,7 @@ public:
 	void SetEffectPoly(std::shared_ptr<BaseEffect>_poly) { m_wpPoly = _poly; }
 	void SetFirePos(Math::Vector3 _pos) { m_pos = _pos; }
 private:
-	float dissolve;
+	float m_dissolve;
+	float m_dissolveMAX;
+	float m_dissolveSpeed;
 };

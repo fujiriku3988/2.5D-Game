@@ -7,37 +7,45 @@
 void Player::Init()
 {
 	CharacterBase::Init();
+	//プレイヤー
 	m_poly = std::make_shared<KdSquarePolygon>();
 	m_poly->SetMaterial("Asset/Textures/obj/player/player1.png");
+	m_poly->SetSplit(3, 4);
+	m_poly->SetUVRect(1);
+	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_pos = { -3,3,-4 };
 	m_dir = {};
 	m_scale = { 1.0 };
 	m_texSize = { 96,96 };
 	m_speed = 0.05f;
+	m_vol.damage = 0.5f;
+	m_vol.walk = 0.3f;
+	//アニメーション関係
 	m_walkWait = 0;
-	m_poly->SetSplit(3, 4);
-	m_poly->SetUVRect(1);
 	m_dirType = DirType::Down;
 	m_anime.speed = 0.05f;
 	m_anime.count = 0;
 	m_animeCnt = 0;
-	m_hitFlg = false;
-	m_poly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
+	m_animeCntMAX = 3;
 	m_color = { 1,1,1,1 };
-	m_time = 6;
+	m_time = 6;//ダメージ表現時間
+	m_timeFrame = m_time;
 	m_objType = KdGameObject::ePlayer;
+	//HP
 	m_tex.Load("Asset/Textures/obj/player/hp04.png");
 	m_maxHp = 3;
 	m_nowHp = m_maxHp;
 	m_color = { 1,1,1,1 };
 	m_spritePos = { -620,330 };
-	m_keyFlg = false;
-	m_walkWait = 0;
-	m_walkFlg = false;
+	//フラグ関係
+	m_hitFlg = false;//当たったか
+	m_keyFlg = false;//キー押してるか
+	m_walkFlg = false;//歩いているか
 }
 
 void Player::PreUpdate()
 {
+	//HP
 	if (m_nowHp <= 1)
 	{
 		m_nowHp = 1;
@@ -54,7 +62,7 @@ void Player::PreUpdate()
 		else
 		{
 			m_hitFlg = false;
-			m_time = 6;
+			m_time = m_timeFrame;
 		}
 	}
 	else
@@ -123,7 +131,7 @@ void Player::Update()
 		if (m_walkWait <= 0) { m_walkWait = 0; }
 		if (m_walkWait == 0)
 		{
-			KdAudioManager::Instance().Play("Asset/Sounds/SE/walk.wav", false, 0.3f);
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/walk.wav", false, m_vol.walk);
 			m_walkWait = 40;
 		}
 	}
@@ -132,7 +140,7 @@ void Player::Update()
 	m_anime.count += m_anime.speed;
 	m_animeCnt = m_anime.count;
 
-	if (m_animeCnt > 3)
+	if (m_animeCnt > m_animeCntMAX)
 	{
 		m_animeCnt = 0;
 		m_anime.count = 0;
@@ -159,12 +167,6 @@ void Player::Update()
 
 void Player::PostUpdate()
 {
-	if (m_pos.y < -20)
-	{
-		OnHit();
-		m_pos = { 0,6,3 };
-	}
-
 	//レイ飛ばして当たり判定
 	KdCollider::RayInfo ray;
 	ray.m_pos = m_pos;
@@ -268,8 +270,6 @@ void Player::PostUpdate()
 	//当たり判定をしたいタイプを設定
 	sphere2.m_type = KdCollider::TypeEvent;
 	//m_pDebugWire->AddDebugSphere(sphere2.m_sphere.Center, sphere2.m_sphere.Radius);
-	//球が当たったオブジェクトの情報を格納するリスト
-	//std::list<KdCollider::CollisionResult> retSphereList;
 	//球と当たり判定！！！！！！
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
@@ -324,7 +324,7 @@ void Player::OnHit()
 	m_hitFlg = true;
 	m_nowHp--;
 	m_pos += m_vecDir * 1.5;
-	KdAudioManager::Instance().Play("Asset/Sounds/SE/damage.wav", false, 0.5f);
+	KdAudioManager::Instance().Play("Asset/Sounds/SE/damage.wav", false, m_vol.damage);
 }
 
 void Player::OnHitGoal()

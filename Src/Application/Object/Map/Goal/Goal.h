@@ -17,5 +17,7 @@ private:
 	Math::Vector3 m_scale;
 	Math::Color m_color;
 	float m_alpha;
+	float m_alphaMAX;
+	float m_alphaMIN;
 	float m_alSpeed;
 };

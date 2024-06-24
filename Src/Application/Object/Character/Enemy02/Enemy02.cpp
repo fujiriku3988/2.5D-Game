@@ -21,12 +21,6 @@ void Enemy02::Init()
 
 void Enemy02::PreUpdate()
 {
-	/*m_anime += m_animeSpeed;
-	m_poly->SetUVRect(m_fly[(int)m_anime]);
-	if (m_anime > 4)
-	{
-		m_anime = 0;
-	}*/
 }
 
 void Enemy02::Update()
@@ -40,9 +34,6 @@ void Enemy02::Update()
 		m_angle += -360.0f;
 	}
 	m_pos.y += sin(DirectX::XMConvertToRadians(m_angle))*0.02;
-
-	//m_gravity += 0.005f;
-	//m_pos.y -= m_gravity;
 }
 
 void Enemy02::PostUpdate()

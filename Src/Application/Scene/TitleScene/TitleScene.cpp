@@ -12,17 +12,23 @@ using namespace std;
 void TitleScene::Event()
 {
 	ShowCursor(false);
-	if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
+	//if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
 		if (!m_keyFlg)
 		{
-			KdAudioManager::Instance().Play("Asset/Sounds/SE/click.wav",false,0.3f);
+
+			
 			if (m_player.expired() == false)
 			{
 				m_player.lock()->AnimeOn();
 			}
 			if (m_click.expired() == false)
 			{
+				if (!m_click.lock()->GetClickFlg())
+				{
+					KdAudioManager::Instance().Play("Asset/Sounds/SE/click.wav", false, m_vol.click);
+				}
 				m_click.lock()->ClickOn();
 			}
 			m_keyFlg = true;
@@ -38,8 +44,11 @@ void TitleScene::Event()
 
 void TitleScene::Init()
 {
+	m_vol.click = 0.3f;
+	m_vol.BGM = 0.05f;
+
 	KdAudioManager::Instance().StopAllSound();
-	KdAudioManager::Instance().Play("Asset/Sounds/BGM/bgm03.wav", true, 0.05f);
+	KdAudioManager::Instance().Play("Asset/Sounds/BGM/bgm03.wav", true, m_vol.BGM);
 
 	shared_ptr<BackGround02>back02 = make_shared<BackGround02>();
 	back02->Init();
