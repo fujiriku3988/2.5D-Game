@@ -17,6 +17,8 @@
 #include"../../Object/Map/Warp/gate/Gate04.h"
 #include"../../Object/Map/Warp/gate/Gate05.h"
 #include"../../Object/Camera/Camera.h"
+#include"../../Scene/Text/GameOver.h"
+#include"../../Scene/Text/GameClear.h"
 using namespace std;
 
 void GameScene::Event()
@@ -28,6 +30,22 @@ void GameScene::Event()
 		(
 			SceneManager::SceneType::Title
 		);
+	}
+
+	if (m_player.expired() == false)
+	{
+		if (!m_player.lock()->GetAliveFlg())
+		{
+			std::shared_ptr<GameOver>over = std::make_shared<GameOver>();
+			over->Init();
+			AddObject(over);
+		}
+	}
+	if (m_player.lock()->GetGoalFlg())
+	{
+		std::shared_ptr<GameClear>clear = std::make_shared<GameClear>();
+		clear->Init();
+		AddObject(clear);
 	}
 }
 
@@ -122,5 +140,5 @@ void GameScene::Init()
 	camera->SetTarget(player);
 	player->SetCamera(camera);
 	AddObject(camera);
-	
+	m_player = player;
 }

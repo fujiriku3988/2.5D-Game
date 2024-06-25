@@ -127,9 +127,6 @@
     <Filter Include="Src\Application\Fade">
       <UniqueIdentifier>{9db7437c-b9c5-49d3-aaca-6e7134bc80a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\UI">
-      <UniqueIdentifier>{f7679f05-f7b8-44d7-9825-6bbe06f0712f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Scene\Text">
       <UniqueIdentifier>{3eed745a-6bdb-46c1-a13e-4d8db7f4ccf3}</UniqueIdentifier>
     </Filter>
@@ -378,6 +375,9 @@
     <ClInclude Include="Src\Application\Scene\Text\Click.h">
       <Filter>Src\Application\Scene\Text</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\Text\GameOver.h">
+      <Filter>Src\Application\Scene\Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -597,6 +597,9 @@
       <Filter>Src\Application\Scene\Text</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\Text\Click.cpp">
+      <Filter>Src\Application\Scene\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\Text\GameOver.cpp">
       <Filter>Src\Application\Scene\Text</Filter>
     </ClCompile>
   </ItemGroup>

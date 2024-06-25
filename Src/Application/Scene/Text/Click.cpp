@@ -3,7 +3,7 @@
 
 void Click::Init()
 {
-	m_tex.Load("Asset/Textures/obj/Text/click04.png");
+	m_tex.Load("Asset/Textures/obj/Text/click01.png");
 	m_spritePos = { 0,0 };
 	m_scale = { 1 };
 	m_texSize = { 496,75 };

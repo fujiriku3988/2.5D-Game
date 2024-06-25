@@ -2,7 +2,7 @@
 
 void Title::Init()
 {
-	m_tex.Load("Asset/Textures/obj/Text/title02.png");
+	m_tex.Load("Asset/Textures/obj/Text/title01.png");
 	m_spritePos = {0,200};
 	m_scale = {1.5};
 	m_texSize = {812,87};

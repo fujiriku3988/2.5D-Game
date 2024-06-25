@@ -3,6 +3,7 @@
 #include"../../../Object/Camera/Camera.h"
 #include"../../../Fade/Fade.h"
 #include"../../../Scene/Text/GameClear.h"
+#include"../../../Scene/Text/GameOver.h"
 
 void Player::Init()
 {
@@ -41,14 +42,16 @@ void Player::Init()
 	m_hitFlg = false;//当たったか
 	m_keyFlg = false;//キー押してるか
 	m_walkFlg = false;//歩いているか
+	m_aliveFlg = true;//生存
+	m_goalFlg = false;//ゴールフラグ
 }
 
 void Player::PreUpdate()
 {
 	//HP
-	if (m_nowHp <= 1)
+	if (m_nowHp <= 0)
 	{
-		m_nowHp = 1;
+		m_nowHp = 0;
 	}
 
 	//ダメージ受けた時のカラー変更
@@ -77,6 +80,7 @@ void Player::Update()
 {
 	m_playerFowardVec = GetMatrix().Forward();
 	m_playerSideVec = GetMatrix().Right();
+	m_speed = 0.05f;
 	//後で消す
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
@@ -84,45 +88,48 @@ void Player::Update()
 	}
 	
 	m_dir = Math::Vector3::Zero;
-	//プレイヤー動き
-	if (GetAsyncKeyState('A') & 0x8000)
+	if (m_nowHp >= 1 && !m_goalFlg)
 	{
-		m_dirType |= Left;
-		m_dir.x = -1.0f;
-		m_keyFlg = true;
-		m_walkFlg = true;
-		m_poly->SetUVRect(Walk_L[(int)m_animeCnt]);
-		m_vecDir = m_playerSideVec;
-	}
+		//プレイヤー動き
+		if (GetAsyncKeyState('A') & 0x8000)
+		{
+			m_dirType |= Left;
+			m_dir.x = -1.0f;
+			m_keyFlg = true;
+			m_walkFlg = true;
+			m_poly->SetUVRect(Walk_L[(int)m_animeCnt]);
+			m_vecDir = m_playerSideVec;
+		}
 
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		m_dirType |= Right;
-		m_dir.x = 1.0f;
-		m_keyFlg = true;
-		m_walkFlg = true;
-		m_poly->SetUVRect(Walk_R[(int)m_animeCnt]);
-		m_vecDir = -m_playerSideVec;
-	}
+		if (GetAsyncKeyState('D') & 0x8000)
+		{
+			m_dirType |= Right;
+			m_dir.x = 1.0f;
+			m_keyFlg = true;
+			m_walkFlg = true;
+			m_poly->SetUVRect(Walk_R[(int)m_animeCnt]);
+			m_vecDir = -m_playerSideVec;
+		}
 
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		m_dirType |= Up;
-		m_dir.z = 1.0f;
-		m_keyFlg = true;
-		m_walkFlg = true;
-		m_poly->SetUVRect(Walk_U[(int)m_animeCnt]);
-		m_vecDir = m_playerFowardVec;
-	}
+		if (GetAsyncKeyState('W') & 0x8000)
+		{
+			m_dirType |= Up;
+			m_dir.z = 1.0f;
+			m_keyFlg = true;
+			m_walkFlg = true;
+			m_poly->SetUVRect(Walk_U[(int)m_animeCnt]);
+			m_vecDir = m_playerFowardVec;
+		}
 
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		m_dirType |= Down;
-		m_dir.z = -1.0f;
-		m_keyFlg = true;
-		m_walkFlg = true;
-		m_poly->SetUVRect(Walk_D[(int)m_animeCnt]);
-		m_vecDir = -m_playerFowardVec;
+		if (GetAsyncKeyState('S') & 0x8000)
+		{
+			m_dirType |= Down;
+			m_dir.z = -1.0f;
+			m_keyFlg = true;
+			m_walkFlg = true;
+			m_poly->SetUVRect(Walk_D[(int)m_animeCnt]);
+			m_vecDir = -m_playerFowardVec;
+		}
 	}
 
 	if (m_walkFlg)
@@ -146,6 +153,7 @@ void Player::Update()
 		m_anime.count = 0;
 	}
 
+	//カメラ計算
 	std::shared_ptr<Camera> camera = m_wpCamera.lock();
 	if (camera)
 	{
@@ -156,8 +164,18 @@ void Player::Update()
 		rotMatY = camera->GetRotationYMatrix();
 	}
 
+	//ゲームオーバー処理
+	if (m_nowHp == 0)
+	{
+		m_poly->SetUVRect(Walk_U[1]);
+		m_rot.x = 80;
+		rotMatY = Math::Matrix::CreateRotationY(0);
+		m_pos.y = 3.2;
+		m_gravity = 0;
+		m_aliveFlg = false;
+	}
+
 	//プレイヤー情報
-	m_speed = 0.05f;
 	m_dir.Normalize();
 	m_dir *= m_speed;
 	m_pos += m_dir;
@@ -309,7 +327,8 @@ void Player::PostUpdate()
 
 	scaleMat = Math::Matrix::CreateScale(m_scale);
 	transMat = Math::Matrix::CreateTranslation(m_pos);
-	m_mWorld = scaleMat * rotMatY * transMat;
+	rotMatX = Math::Matrix::CreateRotationX(m_rot.x);
+	m_mWorld = scaleMat * rotMatY * rotMatX * transMat;
 }
 
 void Player::DrawSprite()
@@ -329,9 +348,8 @@ void Player::OnHit()
 
 void Player::OnHitGoal()
 {
-	std::shared_ptr<GameClear>clear = std::make_shared<GameClear>();
-	clear->Init();
-	SceneManager::Instance().AddObject(clear);
+	m_goalFlg = true;
+	m_poly->SetUVRect(Walk_U[1]);
 }
 
 void Player::OnHitLadder()

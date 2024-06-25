@@ -28,6 +28,8 @@ public:
 	void SetCamera(std::shared_ptr<Camera>_camera) { m_wpCamera = _camera; }
 	void ResetRot() { m_rot = {}; }
 	//ゲッター
+	bool GetAliveFlg() { return m_aliveFlg; }
+	bool GetGoalFlg() { return m_goalFlg; }
 private:
 	std::weak_ptr<Camera> m_wpCamera;
 	//プレイヤーHP
@@ -49,5 +51,7 @@ private:
 	Math::Vector3 m_playerSideVec;//横ベクター
 	Math::Vector3 m_vecDir;//合成ベクター
 	bool m_keyFlg = false;//キー押してるか
-	bool m_walkFlg = false;
+	bool m_walkFlg = false;//歩いてるか
+	bool m_aliveFlg = true;//生存フラグ
+	bool m_goalFlg = false;
 };

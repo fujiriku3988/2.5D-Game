@@ -185,6 +185,7 @@
     <ClInclude Include="Src\Application\Scene\SceneManager.h" />
     <ClInclude Include="Src\Application\Scene\Text\Click.h" />
     <ClInclude Include="Src\Application\Scene\Text\GameClear.h" />
+    <ClInclude Include="Src\Application\Scene\Text\GameOver.h" />
     <ClInclude Include="Src\Application\Scene\Text\Title.h" />
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Src\Framework\Direct3D\KdMaterial.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />
     <ClCompile Include="Src\Application\Scene\Text\Click.cpp" />
     <ClCompile Include="Src\Application\Scene\Text\GameClear.cpp" />
+    <ClCompile Include="Src\Application\Scene\Text\GameOver.cpp" />
     <ClCompile Include="Src\Application\Scene\Text\Title.cpp" />
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Src\Framework\Direct3D\KdMaterial.cpp">

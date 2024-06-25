@@ -49,10 +49,6 @@ void Fire::PostUpdate()
 	m_mWorld = scaleMat * rotMatX * transMat;
 }
 
-void Fire::GenerateDepthMapFromLight()
-{
-}
-
 void Fire::OnHit()
 {
 	m_isExpired = true;

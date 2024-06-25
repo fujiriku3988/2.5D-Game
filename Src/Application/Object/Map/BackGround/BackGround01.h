@@ -7,6 +7,7 @@ public:
 	~BackGround01() override{};
 
 	void Init()override;
+	void Update()override;
 	void DrawLit()override;
 
 

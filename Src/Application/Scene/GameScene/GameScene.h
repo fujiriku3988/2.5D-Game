@@ -9,6 +9,7 @@ public :
 	~GameScene() {}
 
 private:
+	std::weak_ptr< Player>m_player;
 
 	void Event() override;
 	void Init() override;
